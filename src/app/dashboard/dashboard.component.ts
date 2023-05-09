@@ -7,360 +7,41 @@ import { CommercejsService } from '../commercejs.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-  products: any[] = mock.data;
+  products: any[] = [];
+  carts: any[] = [];
+
   constructor(private commercejs: CommercejsService) {}
 
   ngOnInit() {
-    // const products = this.commercejs.getProducts();
-    // this.products = products.data;
-    // console.log(this.products.data);
+    this.getProduct();
+  }
+
+  getProduct() {
+    this.commercejs
+      .getCommerce()
+      .products.list()
+      .then((res) => {
+        this.products = res.data;
+        console.log(this.products);
+      });
+  }
+
+  addToCart(productId: string) {
+    this.commercejs
+      .getCommerce()
+      .cart.add(productId, 1)
+      .then((res) => {
+        console.log(res);
+      });
+  }
+
+  getCart() {
+    this.commercejs
+      .getCommerce()
+      .cart.retrieve()
+      .then((res) => {
+        console.log('cart ==>', res);
+        this.carts = res.line_items;
+      });
   }
 }
-
-const mock = {
-  data: [
-    {
-      id: 'prod_Op1YoVDj8glXLv',
-      created: 1683177878,
-      updated: 1683177952,
-      active: true,
-      permalink: 'wuBDJQ',
-      name: 'Razer BlackShark V2 Special Edition',
-      description: '<p>Razer Kaira HyperSpeed - Xbox Licensed</p>',
-      price: {
-        raw: 400,
-        formatted: '400.00',
-        formatted_with_symbol: 'RM400.00',
-        formatted_with_code: '400.00 MYR',
-      },
-      inventory: {
-        managed: false,
-        available: 0,
-      },
-      sku: 'Raz/RZ0/Hea/Bla',
-      sort_order: 0,
-      seo: {
-        title: null,
-        description: null,
-      },
-      thank_you_url: null,
-      meta: null,
-      conditionals: {
-        is_active: true,
-        is_tax_exempt: false,
-        is_pay_what_you_want: false,
-        is_inventory_managed: false,
-        is_sold_out: false,
-        has_digital_delivery: false,
-        has_physical_delivery: false,
-        has_images: true,
-        collects_fullname: false,
-        collects_shipping_address: false,
-        collects_billing_address: false,
-        collects_extra_fields: false,
-      },
-      is: {
-        active: true,
-        tax_exempt: false,
-        pay_what_you_want: false,
-        inventory_managed: false,
-        sold_out: false,
-      },
-      has: {
-        digital_delivery: false,
-        physical_delivery: false,
-        images: true,
-      },
-      collects: {
-        fullname: false,
-        shipping_address: false,
-        billing_address: false,
-        extra_fields: false,
-      },
-      checkout_url: {
-        checkout: 'https://checkout.chec.io/wuBDJQ?checkout=true',
-        display: 'https://checkout.chec.io/wuBDJQ',
-      },
-      categories: [],
-      image: {
-        id: 'ast_kd6Ll2KLJ1wV2m',
-        url: 'https://cdn.chec.io/merchants/52052/assets/PCpAfuhTxCS6aKzk|Razer Kaira HyperSpeed - Xbox Licensed.png',
-        description: null,
-        is_image: true,
-        filename: 'Razer Kaira HyperSpeed - Xbox Licensed.png',
-        file_size: 86960,
-        file_extension: 'png',
-        image_dimensions: {
-          width: 500,
-          height: 500,
-        },
-        meta: [],
-        created_at: 1683177850,
-        updated_at: 1683177854,
-      },
-    },
-    {
-      id: 'prod_4WJvlKR8Ee5bYV',
-      created: 1683178046,
-      updated: 1683178046,
-      active: true,
-      permalink: 'wprc0j',
-      name: 'Razer BlackShark V2 - ESL Edition',
-      description: '<p>Razer BlackShark V2 - ESL Edition</p>',
-      price: {
-        raw: 400.73,
-        formatted: '400.73',
-        formatted_with_symbol: 'RM400.73',
-        formatted_with_code: '400.73 MYR',
-      },
-      inventory: {
-        managed: false,
-        available: 0,
-      },
-      sku: 'Raz/RZ0/ESL/Yel',
-      sort_order: 0,
-      seo: {
-        title: null,
-        description: null,
-      },
-      thank_you_url: null,
-      meta: null,
-      conditionals: {
-        is_active: true,
-        is_tax_exempt: false,
-        is_pay_what_you_want: false,
-        is_inventory_managed: false,
-        is_sold_out: false,
-        has_digital_delivery: false,
-        has_physical_delivery: false,
-        has_images: true,
-        collects_fullname: false,
-        collects_shipping_address: false,
-        collects_billing_address: false,
-        collects_extra_fields: false,
-      },
-      is: {
-        active: true,
-        tax_exempt: false,
-        pay_what_you_want: false,
-        inventory_managed: false,
-        sold_out: false,
-      },
-      has: {
-        digital_delivery: false,
-        physical_delivery: false,
-        images: true,
-      },
-      collects: {
-        fullname: false,
-        shipping_address: false,
-        billing_address: false,
-        extra_fields: false,
-      },
-      checkout_url: {
-        checkout: 'https://checkout.chec.io/wprc0j?checkout=true',
-        display: 'https://checkout.chec.io/wprc0j',
-      },
-      categories: [],
-      image: {
-        id: 'ast_4OANwRqgJBlvYL',
-        url: 'https://cdn.chec.io/merchants/52052/assets/fpWe0kwMV5aCImoV|Razer BlackShark V2 - ESL Edition.png',
-        description: null,
-        is_image: true,
-        filename: 'Razer BlackShark V2 - ESL Edition.png',
-        file_size: 82204,
-        file_extension: 'png',
-        image_dimensions: {
-          width: 500,
-          height: 500,
-        },
-        meta: [],
-        created_at: 1683178025,
-        updated_at: 1683178027,
-      },
-    },
-    {
-      id: 'prod_zkK6oLQv6E5Xn0',
-      created: 1683178146,
-      updated: 1683259388,
-      active: true,
-      permalink: 'dfX2B8',
-      name: 'Razer Kaira HyperSpeed - Xbox Licensed - Black',
-      description: '<p>Razer Kaira HyperSpeed - Xbox Licensed - Black</p>',
-      price: {
-        raw: 578.85,
-        formatted: '578.85',
-        formatted_with_symbol: 'RM578.85',
-        formatted_with_code: '578.85 MYR',
-      },
-      inventory: {
-        managed: false,
-        available: 0,
-      },
-      sku: 'Raz/RZK/Bas/Bla',
-      sort_order: 0,
-      seo: {
-        title: null,
-        description: null,
-      },
-      thank_you_url: null,
-      meta: null,
-      conditionals: {
-        is_active: true,
-        is_tax_exempt: false,
-        is_pay_what_you_want: false,
-        is_inventory_managed: false,
-        is_sold_out: false,
-        has_digital_delivery: false,
-        has_physical_delivery: false,
-        has_images: true,
-        collects_fullname: false,
-        collects_shipping_address: false,
-        collects_billing_address: false,
-        collects_extra_fields: false,
-      },
-      is: {
-        active: true,
-        tax_exempt: false,
-        pay_what_you_want: false,
-        inventory_managed: false,
-        sold_out: false,
-      },
-      has: {
-        digital_delivery: false,
-        physical_delivery: false,
-        images: true,
-      },
-      collects: {
-        fullname: false,
-        shipping_address: false,
-        billing_address: false,
-        extra_fields: false,
-      },
-      checkout_url: {
-        checkout: 'https://checkout.chec.io/dfX2B8?checkout=true',
-        display: 'https://checkout.chec.io/dfX2B8',
-      },
-      categories: [
-        {
-          id: 'cat_ZM8X5nV6O5pv4q',
-          slug: 'headphones',
-          name: 'Headphones',
-        },
-      ],
-      image: {
-        id: 'ast_yA6nldRWXaoEWb',
-        url: 'https://cdn.chec.io/merchants/52052/assets/9MLl3fItyCCrqEKx|Razer Kaira HyperSpeed - Xbox Licensed.png',
-        description: null,
-        is_image: true,
-        filename: 'Razer Kaira HyperSpeed - Xbox Licensed.png',
-        file_size: 86960,
-        file_extension: 'png',
-        image_dimensions: {
-          width: 500,
-          height: 500,
-        },
-        meta: [],
-        created_at: 1683178127,
-        updated_at: 1683178130,
-      },
-    },
-    {
-      id: 'prod_DWy4oGEVR9l6Jx',
-      created: 1683178258,
-      updated: 1683523858,
-      active: true,
-      permalink: 'SojFsr',
-      name: 'Razer Leviathan V2 Proa asdlkaskldmaklsmdlkasmdkl',
-      description:
-        '<p></p><p>Razer Leviathan V2 Pro askjdnasjkdnaksjndjasndkjasndas</p>',
-      price: {
-        raw: 1781.16,
-        formatted: '1,781.16',
-        formatted_with_symbol: 'RM1,781.16',
-        formatted_with_code: '1,781.16 MYR',
-      },
-      inventory: {
-        managed: false,
-        available: 0,
-      },
-      sku: 'Raz/RZS/Bas/Chr',
-      sort_order: 0,
-      seo: {
-        title: null,
-        description: null,
-      },
-      thank_you_url: null,
-      meta: null,
-      conditionals: {
-        is_active: true,
-        is_tax_exempt: false,
-        is_pay_what_you_want: false,
-        is_inventory_managed: false,
-        is_sold_out: false,
-        has_digital_delivery: false,
-        has_physical_delivery: false,
-        has_images: true,
-        collects_fullname: true,
-        collects_shipping_address: true,
-        collects_billing_address: true,
-        collects_extra_fields: false,
-      },
-      is: {
-        active: true,
-        tax_exempt: false,
-        pay_what_you_want: false,
-        inventory_managed: false,
-        sold_out: false,
-      },
-      has: {
-        digital_delivery: false,
-        physical_delivery: false,
-        images: true,
-      },
-      collects: {
-        fullname: true,
-        shipping_address: true,
-        billing_address: true,
-        extra_fields: false,
-      },
-      checkout_url: {
-        checkout: 'https://checkout.chec.io/SojFsr?checkout=true',
-        display: 'https://checkout.chec.io/SojFsr',
-      },
-      categories: [
-        {
-          id: 'cat_AYrQlWAxnonbR4',
-          slug: 'speaker',
-          name: 'Speaker',
-        },
-      ],
-      image: {
-        id: 'ast_VPvL5zRLkq5AQk',
-        url: 'https://cdn.chec.io/merchants/52052/assets/RR3u7Z1AMFVaLsqt|Razer Leviathan V2 Pro.png',
-        description: null,
-        is_image: true,
-        filename: 'Razer Leviathan V2 Pro.png',
-        file_size: 27106,
-        file_extension: 'png',
-        image_dimensions: {
-          width: 300,
-          height: 300,
-        },
-        meta: [],
-        created_at: 1683178207,
-        updated_at: 1683178210,
-      },
-    },
-  ],
-  meta: {
-    pagination: {
-      total: 4,
-      count: 4,
-      per_page: 20,
-      current_page: 1,
-      total_pages: 1,
-      links: {},
-    },
-  },
-};

@@ -10,11 +10,11 @@ export class AppComponent {
   title = 'Stripe Ecommerce';
   isLoggedIn = false;
 
-  constructor(private fireauth: AuthService) {
-    this.isLoggedIn = this.fireauth.isLoggedIn;
-  }
+  constructor(public fireauth: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fireauth.isLoggedin = this.isLoggedIn;
+  }
 
   onBack(): void {
     window.history.back();

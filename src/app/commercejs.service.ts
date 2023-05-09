@@ -7,15 +7,11 @@ import { environment } from '../environments/environment';
 })
 export class CommercejsService {
   private commerce: Commerce;
-
   constructor() {
     this.commerce = new Commerce(environment.commercejs.publicKey, true);
   }
 
-  getProducts(): any {
-    this.commerce.products.list().then((response: any) => {
-      console.log(response.data);
-      return response.data;
-    });
+  public getCommerce(): Commerce {
+    return this.commerce;
   }
 }

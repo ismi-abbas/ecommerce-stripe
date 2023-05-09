@@ -13,6 +13,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 @NgModule({
   declarations: [],
@@ -30,6 +32,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzInputModule,
     NzCheckboxModule,
     NzCardModule,
+    NzDividerModule,
+    NzBadgeModule,
   ],
   exports: [
     NzLayoutModule,
@@ -44,6 +48,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzInputModule,
     NzCheckboxModule,
     NzCardModule,
+    NzDividerModule,
+    NzBadgeModule,
   ],
 })
 export class AntDesignModule {}

@@ -1,24 +1,31 @@
-<div class="flex w-full flex-col">
+<div class="flex w-full flex-col pb-8">
   <div class="flex mx-auto flex-col mt-4 mb-4 text-center">
     <h1 class="text-4xl font-semibold">Dashboard</h1>
   </div>
 
-  <div class="grid md:grid-cols-3 xl:grid-cols-4 grid-flow-row gap-2 mx-4">
+  <div class="grid md:grid-cols-3 xl:grid-cols-4 grid-rows-1 w-auto gap-2 mx-4">
     <div *ngFor="let product of products">
       <nz-card
-        style="width: 300px; height: 500px"
-        nzTitle="Card title"
-        [nzExtra]="extraTemplate"
+        class="md:h-[36rem] h-auto w-auto"
+        nzTitle="{{ product.name }}"
+        [nzLoading]="products.length === 0"
       >
-        <p>{{ product.name }}</p>
-        <img src="{{ product.image.url }}" alt="" />
-        <p>{{ product.price.formatted_with_symbol }}</p>
-        <p [innerHTML]="product.description"></p>
-        <p>Card content</p>
+        <img src="{{ product?.image?.url }}" alt="{{ product.image.name }}" />
+        <nz-divider></nz-divider>
+        <div class="flex flex-col justify-between">
+          <div class="text-start">
+            <p class="font-medium">
+              Price {{ product.price.formatted_with_symbol }}
+            </p>
+            <div class="h-14 overflow-y-auto">
+              <p class="pt-2 font-light" [innerHTML]="product.description"></p>
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <button nz-button nzType="primary">Add To Cart</button>
+          </div>
+        </div>
       </nz-card>
-      <ng-template #extraTemplate>
-        <a>More</a>
-      </ng-template>
     </div>
   </div>
 </div>

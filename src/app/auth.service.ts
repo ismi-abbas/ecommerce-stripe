@@ -9,6 +9,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class AuthService {
   userData: any;
+  isLoggedin: boolean = false;
 
   constructor(
     private fireauth: AngularFireAuth,
@@ -47,9 +48,15 @@ export class AuthService {
     console.log('SetUserData', user);
   }
 
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    // return user !== null && user.emailVerified !== false ? true : false;
-    return user !== null ? true : false;
+  // get isLoggedIn(): boolean {
+  //   const user = JSON.parse(localStorage.getItem('user')!);
+  //   return user !== null ? true : false;
+  // }
+
+  async logout() {
+    return this.fireauth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.router.navigate(['login']);
+    });
   }
 }

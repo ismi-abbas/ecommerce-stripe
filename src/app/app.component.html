@@ -4,12 +4,29 @@
       title
     }}</nz-page-header-title>
     <nz-page-header-extra>
-      <nz-space>
-        <button *nzSpaceItem nz-button nzType="primary" routerLink="/login">
+      <div class="flex gap-2">
+        <button
+          nz-button
+          nzType="primary"
+          routerLink="/login"
+          (click)="fireauth.logout()"
+        >
           {{ isLoggedIn ? "Logout" : "Login" }}
         </button>
-        <button *nzSpaceItem nz-button routerLink="/register">Register</button>
-      </nz-space>
+        <button *ngIf="!isLoggedIn" nz-button routerLink="/register">
+          Register
+        </button>
+
+        <div>
+          <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+        </div>
+
+        <nz-badge [nzCount]="1">
+          <a routerLink="/cart">
+            <i nz-icon nzType="shopping-cart"></i>
+          </a>
+        </nz-badge>
+      </div>
     </nz-page-header-extra>
   </nz-page-header>
   <nz-content class="mt-10 mx-auto">

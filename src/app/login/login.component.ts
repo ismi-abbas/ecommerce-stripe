@@ -32,7 +32,7 @@ export class LoginComponent {
       this.auth
         .login(this.validateForm.value.email, this.validateForm.value.password)
         .then((res) => {
-          console.log('res', res);
+          this.auth.isLoggedin = true;
         })
         .catch((err) => {
           console.log('err', err);
