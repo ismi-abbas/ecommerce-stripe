@@ -1,6 +1,6 @@
 <div class="flex w-full flex-col pb-8">
   <div class="flex mx-auto flex-col mt-4 mb-4 text-center">
-    <h1 class="text-4xl font-semibold">Dashboard</h1>
+    <h1 class="text-3xl font-semibold">Store</h1>
   </div>
 
   <div class="grid md:grid-cols-3 xl:grid-cols-4 grid-rows-1 w-auto gap-2 mx-4">
@@ -10,7 +10,14 @@
         nzTitle="{{ product.name }}"
         [nzLoading]="products.length === 0"
       >
-        <img src="{{ product?.image?.url }}" alt="{{ product.image.name }}" />
+        <div class="h-[20rem] w-[20rem]">
+          <img
+            src="{{ product?.image?.url }}"
+            alt="{{ product.image.name }}"
+            class="object-cover h-full w-full"
+          />
+        </div>
+
         <nz-divider></nz-divider>
         <div class="flex flex-col justify-between">
           <div class="text-start">

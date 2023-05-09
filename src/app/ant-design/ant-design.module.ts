@@ -1,3 +1,4 @@
+import { IconDefinition } from '@ant-design/icons-angular';
 import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
@@ -16,6 +17,24 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
+import {
+  AccountBookFill,
+  AlertOutline,
+  AlertFill,
+  ShoppingCartOutline,
+  ShopOutline,
+  ShoppingOutline,
+} from '@ant-design/icons-angular/icons';
+
+const icons: IconDefinition[] = [
+  AccountBookFill,
+  AlertOutline,
+  AlertFill,
+  ShoppingCartOutline,
+  ShopOutline,
+  ShoppingOutline,
+];
+
 @NgModule({
   declarations: [],
   imports: [
@@ -26,7 +45,7 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     NzDescriptionsModule,
     NzSpaceModule,
     NzButtonModule,
-    NzIconModule,
+    NzIconModule.forRoot(icons),
     NzTypographyModule,
     NzFormModule,
     NzInputModule,

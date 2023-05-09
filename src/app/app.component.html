@@ -17,13 +17,14 @@
           Register
         </button>
 
-        <div>
-          <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
-        </div>
-
-        <nz-badge [nzCount]="1">
+        <nz-badge [nzCount]="cart">
           <a routerLink="/cart">
-            <i nz-icon nzType="shopping-cart"></i>
+            <span
+              nz-icon
+              nzType="shopping-cart"
+              nzTheme="outline"
+              class="text-xl"
+            ></span>
           </a>
         </nz-badge>
       </div>
