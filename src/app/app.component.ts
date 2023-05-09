@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,10 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'ecommerce-stripe';
-  isLoggedIn = true;
+  title = 'Stripe Ecommerce';
+  isLoggedIn = false;
 
-  constructor() {}
+  constructor(private fireauth: AuthService) {
+    this.isLoggedIn = this.fireauth.isLoggedIn;
+  }
 
   ngOnInit(): void {}
 

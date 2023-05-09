@@ -12,6 +12,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 @NgModule({
   declarations: [],
@@ -28,6 +29,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
     NzFormModule,
     NzInputModule,
     NzCheckboxModule,
+    NzCardModule,
   ],
   exports: [
     NzLayoutModule,
@@ -41,6 +43,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
     NzFormModule,
     NzInputModule,
     NzCheckboxModule,
+    NzCardModule,
   ],
 })
 export class AntDesignModule {}

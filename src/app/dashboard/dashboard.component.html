@@ -1,1 +1,24 @@
-<p>dashboard works!</p>
+<div class="flex w-full flex-col">
+  <div class="flex mx-auto flex-col mt-4 mb-4 text-center">
+    <h1 class="text-4xl font-semibold">Dashboard</h1>
+  </div>
+
+  <div class="grid md:grid-cols-3 xl:grid-cols-4 grid-flow-row gap-2 mx-4">
+    <div *ngFor="let product of products">
+      <nz-card
+        style="width: 300px; height: 500px"
+        nzTitle="Card title"
+        [nzExtra]="extraTemplate"
+      >
+        <p>{{ product.name }}</p>
+        <img src="{{ product.image.url }}" alt="" />
+        <p>{{ product.price.formatted_with_symbol }}</p>
+        <p [innerHTML]="product.description"></p>
+        <p>Card content</p>
+      </nz-card>
+      <ng-template #extraTemplate>
+        <a>More</a>
+      </ng-template>
+    </div>
+  </div>
+</div>

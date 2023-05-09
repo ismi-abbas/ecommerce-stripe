@@ -23,9 +23,20 @@ export class LoginComponent {
     password: [{ type: 'required', message: 'Please input your email' }],
   };
 
+  constructor(private fb: UntypedFormBuilder, private auth: AuthService) {}
+
   submitForm(): void {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
+
+      this.auth
+        .login(this.validateForm.value.email, this.validateForm.value.password)
+        .then((res) => {
+          console.log('res', res);
+        })
+        .catch((err) => {
+          console.log('err', err);
+        });
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -35,8 +46,6 @@ export class LoginComponent {
       });
     }
   }
-
-  constructor(private fb: UntypedFormBuilder, public auth: AuthService) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
