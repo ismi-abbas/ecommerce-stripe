@@ -1,6 +1,18 @@
 <div class="flex w-full flex-col pb-8">
   <div class="flex mx-auto flex-col mt-4 mb-4 text-center">
     <h1 class="text-3xl font-semibold">Store</h1>
+    <div>
+      <nz-badge [nzCount]="cart_items" (click)="router.navigate(['/checkout'])">
+        <a routerLink="/cart">
+          <span
+            nz-icon
+            nzType="shopping-cart"
+            nzTheme="outline"
+            class="text-xl"
+          ></span>
+        </a>
+      </nz-badge>
+    </div>
   </div>
 
   <div class="grid md:grid-cols-3 xl:grid-cols-4 grid-rows-1 w-auto gap-2 mx-4">
@@ -29,7 +41,9 @@
             </div>
           </div>
           <div class="flex justify-end">
-            <button nz-button nzType="primary">Add To Cart</button>
+            <button nz-button nzType="primary" (click)="addToCart(product.id)">
+              Add To Cart
+            </button>
           </div>
         </div>
       </nz-card>

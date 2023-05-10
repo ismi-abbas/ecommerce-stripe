@@ -11,8 +11,13 @@ export class CartService {
 
   constructor(public commerce: CommercejsService) {}
 
-  updateCart(message: string) {
-    console.log('update cart');
+  addToCart(productId: string) {
+    return from(this.commerce.getCommerce().cart.add(productId, 1)).pipe(
+      map((res: any) => {
+        this.carts = res.total_items;
+        return res;
+      })
+    );
   }
 
   clearCart() {

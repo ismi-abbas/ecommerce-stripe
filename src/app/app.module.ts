@@ -28,6 +28,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 // Services
 import { AuthService } from './auth.service';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { StripePaymentComponent } from './stripe-payment/stripe-payment.component';
+import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 registerLocaleData(en);
 
@@ -38,6 +41,9 @@ registerLocaleData(en);
     LoginComponent,
     DashboardComponent,
     CheckoutComponent,
+    StripePaymentComponent,
+    CheckoutAddressComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,10 @@
 <nz-layout class="min-h-screen">
-  <nz-page-header (nzBack)="onBack()" nzBackIcon [nzGhost]="true">
-    <nz-page-header-title (click)="onBack()" class="cursor-pointer">{{
-      title
-    }}</nz-page-header-title>
+  <nz-page-header (nzBack)="onBack()" [nzGhost]="true">
+    <nz-page-header-title
+      (click)="router.navigate(['/'])"
+      class="cursor-pointer"
+      >{{ title }}</nz-page-header-title
+    >
     <nz-page-header-extra>
       <div class="flex gap-2">
         <button

@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { CommercejsService } from '../commercejs.service';
+import { CartService } from '../cart.service';
+import { Cart } from '@chec/commerce.js/types/cart';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,41 +10,37 @@ import { CommercejsService } from '../commercejs.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
+  isLoading: boolean = false;
   products: any[] = [];
-  carts: any[] = [];
+  @Input('cart_items_count') cart_items: number = 0;
+  @Input('isAdded') isAdded: boolean = false;
 
-  constructor(private commercejs: CommercejsService) {}
-
-  ngOnInit() {
-    this.getProduct();
+  constructor(
+    private commercejs: CommercejsService,
+    private cartService: CartService,
+    public router: Router
+  ) {
+    this.getProducts();
+    this.cartService.getCartCount().subscribe((count: number) => {
+      this.cart_items = count;
+    });
   }
 
-  getProduct() {
-    this.commercejs
-      .getCommerce()
-      .products.list()
-      .then((res) => {
-        this.products = res.data;
-        console.log(this.products);
-      });
+  ngOnInit() {}
+
+  addToCart(productId: string): void {
+    this.cartService.addToCart(productId).subscribe((res) => {
+      console.log('addToCart', res.total_items);
+      this.cart_items = res.total_items;
+    });
+    this.isAdded = true;
   }
 
-  addToCart(productId: string) {
-    this.commercejs
-      .getCommerce()
-      .cart.add(productId, 1)
-      .then((res) => {
-        console.log(res);
-      });
-  }
-
-  getCart() {
-    this.commercejs
-      .getCommerce()
-      .cart.retrieve()
-      .then((res) => {
-        console.log('cart ==>', res);
-        this.carts = res.line_items;
-      });
+  getProducts() {
+    this.isLoading = true;
+    this.commercejs.getProducts().subscribe((products) => {
+      console.log('products from observable', products);
+      this.products = products;
+    });
   }
 }

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { CartService } from './cart.service';
@@ -12,11 +13,17 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   cart = 0;
 
-  constructor(public fireauth: AuthService, public cartService: CartService) {}
+  constructor(
+    public fireauth: AuthService,
+    public cartService: CartService,
+    public router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fireauth.isLoggedin = this.isLoggedIn;
-    this.cart = this.cartService.getCartCount();
+    this.cartService.getCartCount().subscribe((count: number) => {
+      this.cart = count;
+    });
   }
 
   onBack(): void {

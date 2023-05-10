@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 
@@ -23,6 +25,14 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent,
+  },
+  {
+    path: 'checkout-address',
+    component: CheckoutAddressComponent,
+  },
+  {
+    path: 'shopping-cart',
+    component: ShoppingCartComponent,
   },
 ];
 
