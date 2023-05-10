@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.fireauth.isLoggedin = this.isLoggedIn;
-    this.cart = this.cartService.getCart();
+    this.cart = this.cartService.getCartCount();
   }
 
   onBack(): void {

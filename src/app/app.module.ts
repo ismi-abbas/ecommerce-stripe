@@ -27,6 +27,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 // Services
 import { AuthService } from './auth.service';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 registerLocaleData(en);
 
@@ -36,6 +37,7 @@ registerLocaleData(en);
     RegisterComponent,
     LoginComponent,
     DashboardComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

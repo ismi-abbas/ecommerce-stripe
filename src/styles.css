@@ -6,3 +6,7 @@ body {
   font-family: "Inter", sans-serif;
   margin: 0;
 }
+
+/* div {
+  @apply border border-purple-400;
+} */

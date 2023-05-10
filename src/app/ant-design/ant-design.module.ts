@@ -16,6 +16,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 
 import {
   AccountBookFill,
@@ -24,6 +25,8 @@ import {
   ShoppingCartOutline,
   ShopOutline,
   ShoppingOutline,
+  CheckCircleFill,
+  CheckCircleOutline,
 } from '@ant-design/icons-angular/icons';
 
 const icons: IconDefinition[] = [
@@ -33,6 +36,8 @@ const icons: IconDefinition[] = [
   ShoppingCartOutline,
   ShopOutline,
   ShoppingOutline,
+  CheckCircleFill,
+  CheckCircleOutline,
 ];
 
 @NgModule({
@@ -53,6 +58,7 @@ const icons: IconDefinition[] = [
     NzCardModule,
     NzDividerModule,
     NzBadgeModule,
+    NzAlertModule,
   ],
   exports: [
     NzLayoutModule,
@@ -69,6 +75,7 @@ const icons: IconDefinition[] = [
     NzCardModule,
     NzDividerModule,
     NzBadgeModule,
+    NzAlertModule,
   ],
 })
 export class AntDesignModule {}

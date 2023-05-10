@@ -19,7 +19,7 @@ export class CartService {
     console.log('clear cart');
   }
 
-  getCart(): any {
+  getCartCount(): any {
     this.commerce
       .getCommerce()
       .cart.retrieve()
@@ -27,6 +27,16 @@ export class CartService {
         this.carts = res.total_items;
         console.log('cart ==>', res);
         return res.total_items;
+      });
+  }
+
+  getCartItems(): any {
+    this.commerce
+      .getCommerce()
+      .cart.retrieve()
+      .then((res) => {
+        console.log('cart ==>', res);
+        return res.line_items;
       });
   }
 }
