@@ -1,13 +1,13 @@
 import { CommercejsService } from './commercejs.service';
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   carts: number = 0;
-  private subject = new Subject<any>();
 
   constructor(public commerce: CommercejsService) {}
 
@@ -20,23 +20,14 @@ export class CartService {
   }
 
   getCartCount(): any {
-    this.commerce
-      .getCommerce()
-      .cart.retrieve()
-      .then((res) => {
-        this.carts = res.total_items;
-        console.log('cart ==>', res);
-        return res.total_items;
-      });
+    return from(this.commerce.getCommerce().cart.retrieve()).pipe(
+      map((res: any) => res.total_items)
+    );
   }
 
-  getCartItems(): any {
-    this.commerce
-      .getCommerce()
-      .cart.retrieve()
-      .then((res) => {
-        console.log('cart ==>', res);
-        return res.line_items;
-      });
+  getCartItems(): Observable<any> {
+    return from(this.commerce.getCommerce().cart.retrieve()).pipe(
+      map((res: any) => res)
+    );
   }
 }

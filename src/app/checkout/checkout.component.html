@@ -29,28 +29,35 @@
       {{ shipping_details ? "Shipping Details" : "Order summary" }}
     </h2>
 
-    <div class="flex flex-nowrap flex-col mt-2">
-      <div class="flex flex-row justify-between font-semibold">
-        <span>Name</span>
-        <span>Subtotal</span>
-      </div>
-      <ul *ngFor="let item of checkout_cart" class="mt-4">
-        <li class="flex flex-row justify-between">
-          <div class="flex flex-col">
-            <span>
-              {{ item.product_name }}
-            </span>
+    <div *ngIf="loading" class="text-center my-4">
+      <!-- Show loading indicator or message while loading -->
+      <p>Loading cart items...</p>
+    </div>
 
-            <span class="text-slate-400">Quantity: {{ item.quantity }}</span>
-          </div>
+    <div *ngIf="!loading">
+      <div class="flex flex-nowrap flex-col mt-2">
+        <div class="flex flex-row justify-between font-semibold">
+          <span>Name</span>
+          <span>Subtotal</span>
+        </div>
+        <ul *ngFor="let item of checkout_cart" class="mt-4">
+          <li class="flex flex-row justify-between">
+            <div class="flex flex-col">
+              <span>
+                {{ item.product_name }}
+              </span>
 
-          <span>{{ item.line_total.formatted_with_symbol }}</span>
-        </li>
-      </ul>
+              <span class="text-slate-400">Quantity: {{ item.quantity }}</span>
+            </div>
 
-      <div class="mt-2 flex flex-row justify-between">
-        <h2 class="font-semibold text-base">Total</h2>
-        <h2 class="font-semibold text-base">{{ total_price }}</h2>
+            <span>{{ item.line_total.formatted_with_symbol }}</span>
+          </li>
+        </ul>
+
+        <div class="mt-2 flex flex-row justify-between">
+          <h2 class="font-semibold text-base">Total</h2>
+          <h2 class="font-semibold text-base">{{ total_price }}</h2>
+        </div>
       </div>
     </div>
 
