@@ -1,5 +1,5 @@
 <nz-layout class="min-h-screen">
-  <nz-page-header (nzBack)="onBack()" [nzGhost]="true">
+  <nz-page-header (nzBack)="onBack()" [nzGhost]="false" class="shadow-md">
     <nz-page-header-title
       (click)="router.navigate(['/'])"
       class="cursor-pointer"
@@ -7,11 +7,12 @@
     >
     <nz-page-header-extra>
       <div class="flex gap-2">
+        <!-- Button section -->
         <button
           nz-button
           nzType="primary"
           routerLink="/login"
-          (click)="fireauth.logout()"
+          (click)="fireAuthService.logout()"
         >
           {{ isLoggedIn ? "Logout" : "Login" }}
         </button>
@@ -32,7 +33,7 @@
       </div>
     </nz-page-header-extra>
   </nz-page-header>
-  <nz-content class="mt-10 mx-auto">
+  <nz-content class="mx-auto">
     <router-outlet></router-outlet>
   </nz-content>
 </nz-layout>
