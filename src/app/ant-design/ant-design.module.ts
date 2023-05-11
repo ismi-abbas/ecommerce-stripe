@@ -17,6 +17,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 import {
   AccountBookFill,
@@ -59,6 +60,7 @@ const icons: IconDefinition[] = [
     NzDividerModule,
     NzBadgeModule,
     NzAlertModule,
+    NzSkeletonModule,
   ],
   exports: [
     NzLayoutModule,
@@ -76,6 +78,7 @@ const icons: IconDefinition[] = [
     NzDividerModule,
     NzBadgeModule,
     NzAlertModule,
+    NzSkeletonModule,
   ],
 })
 export class AntDesignModule {}

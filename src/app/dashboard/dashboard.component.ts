@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   products: any[] = [];
   @Input('cart_items_count') cart_items: number = 0;
   @Input('isAdded') isAdded: boolean = false;
@@ -37,9 +37,10 @@ export class DashboardComponent {
   }
 
   getProducts() {
-    this.isLoading = true;
+    this.isLoading = false;
     this.commercejs.getProducts().subscribe((products) => {
       console.log('products from observable', products);
+      this.isLoading = false;
       this.products = products;
     });
   }

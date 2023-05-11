@@ -32,7 +32,7 @@ export class AuthService {
     return this.fireauth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SetUserData(result.user);
+        this.setUserData(result.user);
         this.fireauth.authState.subscribe((user) => {
           if (user) {
             this.router.navigate(['dashboard']);
@@ -44,14 +44,15 @@ export class AuthService {
       });
   }
 
-  SetUserData(user: any) {
+  setUserData(user: any) {
     console.log('SetUserData', user);
   }
 
-  // get isLoggedIn(): boolean {
-  //   const user = JSON.parse(localStorage.getItem('user')!);
-  //   return user !== null ? true : false;
-  // }
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    console.log('IsLoggedIn', user);
+    return user !== null ? true : false;
+  }
 
   async logout() {
     return this.fireauth.signOut().then(() => {

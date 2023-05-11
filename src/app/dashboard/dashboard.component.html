@@ -2,7 +2,10 @@
   <div class="flex mx-auto flex-col mt-4 mb-4 text-center">
     <h1 class="text-3xl font-semibold">Store</h1>
     <div>
-      <nz-badge [nzCount]="cart_items" (click)="router.navigate(['/checkout'])">
+      <nz-badge
+        [nzCount]="cart_items"
+        (click)="router.navigate(['shopping-cart'])"
+      >
         <a routerLink="/cart">
           <span
             nz-icon
@@ -15,7 +18,10 @@
     </div>
   </div>
 
-  <div class="grid md:grid-cols-3 xl:grid-cols-4 grid-rows-1 w-auto gap-2 mx-4">
+  <div
+    class="grid md:grid-cols-3 xl:grid-cols-4 grid-rows-1 w-auto gap-2 mx-4"
+    *ngIf="!isLoading"
+  >
     <div *ngFor="let product of products">
       <nz-card
         class="md:h-[36rem] h-auto w-auto"

@@ -37,6 +37,9 @@ dependencies:
   '@chec/commerce.js':
     specifier: ^2.8.0
     version: 2.8.0
+  '@ngrx/store':
+    specifier: ^16.0.0
+    version: 16.0.0(@angular/core@15.2.0)(rxjs@7.8.0)
   firebase:
     specifier: 9.21.0
     version: 9.21.0
@@ -293,7 +296,7 @@ packages:
       '@angular/core': 15.2.0
     dependencies:
       '@angular/core': 15.2.0(rxjs@7.8.0)(zone.js@0.12.0)
-      tslib: 2.3.0
+      tslib: 2.5.0
     dev: false
 
   /@angular/cdk@15.2.9(@angular/common@15.2.0)(@angular/core@15.2.0)(rxjs@7.8.0):
@@ -349,7 +352,7 @@ packages:
     dependencies:
       '@angular/core': 15.2.0(rxjs@7.8.0)(zone.js@0.12.0)
       rxjs: 7.8.0
-      tslib: 2.3.0
+      tslib: 2.5.0
     dev: false
 
   /@angular/compiler-cli@15.2.0(@angular/compiler@15.2.0)(typescript@4.9.4):
@@ -369,7 +372,7 @@ packages:
       magic-string: 0.27.0
       reflect-metadata: 0.1.13
       semver: 7.5.0
-      tslib: 2.3.0
+      tslib: 2.5.0
       typescript: 4.9.4
       yargs: 17.7.2
     transitivePeerDependencies:
@@ -386,7 +389,7 @@ packages:
         optional: true
     dependencies:
       '@angular/core': 15.2.0(rxjs@7.8.0)(zone.js@0.12.0)
-      tslib: 2.3.0
+      tslib: 2.5.0
 
   /@angular/core@15.2.0(rxjs@7.8.0)(zone.js@0.12.0):
     resolution: {integrity: sha512-UNHNcW3NqzMbG5gMjzXhb4xHrJcZq8rFdLwTLntB0oo2I/WxQFVlxz28nrW+Y09DbJf02MCASBLxD9If/6eT3g==}
@@ -396,7 +399,7 @@ packages:
       zone.js: ~0.11.4 || ~0.12.0
     dependencies:
       rxjs: 7.8.0
-      tslib: 2.3.0
+      tslib: 2.5.0
       zone.js: 0.12.0
 
   /@angular/fire@7.5.0(@angular/common@15.2.0)(@angular/core@15.2.0)(@angular/platform-browser-dynamic@15.2.0)(@angular/platform-browser@15.2.0)(rxjs@7.8.0)(webpack@5.76.1):
@@ -453,7 +456,7 @@ packages:
       '@angular/core': 15.2.0(rxjs@7.8.0)(zone.js@0.12.0)
       '@angular/platform-browser': 15.2.0(@angular/animations@15.2.0)(@angular/common@15.2.0)(@angular/core@15.2.0)
       rxjs: 7.8.0
-      tslib: 2.3.0
+      tslib: 2.5.0
     dev: false
 
   /@angular/platform-browser-dynamic@15.2.0(@angular/common@15.2.0)(@angular/compiler@15.2.0)(@angular/core@15.2.0)(@angular/platform-browser@15.2.0):
@@ -469,7 +472,7 @@ packages:
       '@angular/compiler': 15.2.0(@angular/core@15.2.0)
       '@angular/core': 15.2.0(rxjs@7.8.0)(zone.js@0.12.0)
       '@angular/platform-browser': 15.2.0(@angular/animations@15.2.0)(@angular/common@15.2.0)(@angular/core@15.2.0)
-      tslib: 2.3.0
+      tslib: 2.5.0
     dev: false
 
   /@angular/platform-browser@15.2.0(@angular/animations@15.2.0)(@angular/common@15.2.0)(@angular/core@15.2.0):
@@ -486,7 +489,7 @@ packages:
       '@angular/animations': 15.2.0(@angular/core@15.2.0)
       '@angular/common': 15.2.0(@angular/core@15.2.0)(rxjs@7.8.0)
       '@angular/core': 15.2.0(rxjs@7.8.0)(zone.js@0.12.0)
-      tslib: 2.3.0
+      tslib: 2.5.0
     dev: false
 
   /@angular/router@15.2.0(@angular/common@15.2.0)(@angular/core@15.2.0)(@angular/platform-browser@15.2.0)(rxjs@7.8.0):
@@ -502,7 +505,7 @@ packages:
       '@angular/core': 15.2.0(rxjs@7.8.0)(zone.js@0.12.0)
       '@angular/platform-browser': 15.2.0(@angular/animations@15.2.0)(@angular/common@15.2.0)(@angular/core@15.2.0)
       rxjs: 7.8.0
-      tslib: 2.3.0
+      tslib: 2.5.0
     dev: false
 
   /@ant-design/colors@5.1.1:
@@ -2568,6 +2571,17 @@ packages:
   /@leichtgewicht/ip-codec@2.0.4:
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
     dev: true
+
+  /@ngrx/store@16.0.0(@angular/core@15.2.0)(rxjs@7.8.0):
+    resolution: {integrity: sha512-bmr0KLITh9u1DJO51USTc4OAKX+su06efhTdNiQV/wagifpbC4kA8zr2hdstKMNG3Z5EKTX3XLFanIiREkd6JQ==}
+    peerDependencies:
+      '@angular/core': ^16.0.0
+      rxjs: ^6.5.3 || ^7.5.0
+    dependencies:
+      '@angular/core': 15.2.0(rxjs@7.8.0)(zone.js@0.12.0)
+      rxjs: 7.8.0
+      tslib: 2.5.0
+    dev: false
 
   /@ngtools/webpack@15.2.6(@angular/compiler-cli@15.2.0)(typescript@4.9.4)(webpack@5.76.1):
     resolution: {integrity: sha512-I+kekKItfsCLdX+ZjjmsWqd0AyoYGTQPjlbQAiPtmdH73/rfPOF4Q/3AU4tzTdn0n0GXqZWv6VOs91w99ydi0A==}
@@ -7980,4 +7994,4 @@ packages:
   /zone.js@0.12.0:
     resolution: {integrity: sha512-XtC+I5dXU14HrzidAKBNMqneIVUykLEAA1x+v4KVrd6AUPWlwYORF8KgsVqvgdHiKZ4BkxxjvYi/ksEixTPR0Q==}
     dependencies:
-      tslib: 2.3.0
+      tslib: 2.5.0

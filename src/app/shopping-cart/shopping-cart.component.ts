@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { CartService } from '../cart.service';
 import { Cart } from '@chec/commerce.js/types/cart';
@@ -11,13 +12,25 @@ export class ShoppingCartComponent {
   divsArray: any[] = Array.from({ length: 8 }, (_, i) => i);
   cart_list: any[] = [];
   cart_items: any;
-  total_cost: string = 'RM 1000000';
+  total_cost: string = '';
+  cartId: string = '';
 
-  constructor(public cartService: CartService) {
+  constructor(public cartService: CartService, private router: Router) {
     this.getCartItems();
+    this.getCartId();
   }
 
   ngOnInit(): void {}
+
+  getCartId() {
+    let id = this.cartService.getCartId();
+    console.log('getCartId', id);
+    return id;
+  }
+
+  goToCheckout(): void {
+    this.router.navigate(['checkout']);
+  }
 
   addToCart(productId: string): void {
     this.cartService.addToCart(productId).subscribe((cart) => {
@@ -26,12 +39,23 @@ export class ShoppingCartComponent {
     });
   }
 
+  updateCart(productId: string, quantity: number): void {
+    this.cartService.updateCart(productId, quantity).subscribe((cart) => {
+      console.log('updateCart', cart);
+      this.cart_items = cart;
+      this.cart_list = cart.line_items;
+    });
+  }
+
   removeFromCart(productId?: string): void {
     this.cart_items--;
   }
 
   emptyCart(): void {
-    this.cart_items = 0;
+    this.cartService.emptyCart().subscribe((cart) => {
+      console.log('emptyCart', cart);
+      this.cart_items = cart;
+    });
   }
 
   getCartItems(): void {

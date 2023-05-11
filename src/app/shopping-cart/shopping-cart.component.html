@@ -11,10 +11,7 @@
     <div
       class="grid grid-flow-row justify-center md:grid-cols-4 gap-1 md:gap-2 mt-2 p-4"
     >
-      <div
-        *ngFor="let item of cart_list"
-        class="w-48 p-4 shadow-md m-4 rounded-sm"
-      >
+      <div *ngFor="let item of cart_list" class="w-48 p-4 shadow-md rounded-sm">
         <div class="w-4/4 h-2/4 items-center p-2">
           <img
             src="{{ item?.image.url }}"
@@ -36,7 +33,7 @@
             <span
               nz-button
               nzType="primary"
-              (click)="addToCart(item.product_id)"
+              (click)="updateCart(item.id, item.quantity + 1)"
               class="cursor-pointer"
               >+</span
             >
@@ -69,7 +66,14 @@
         >
           Empty Cart
         </button>
-        <button nz-button nzType="primary" class="mt-4">Checkout</button>
+        <button
+          nz-button
+          nzType="primary"
+          class="mt-4"
+          (click)="goToCheckout()"
+        >
+          Checkout
+        </button>
       </div>
     </div>
   </div>
