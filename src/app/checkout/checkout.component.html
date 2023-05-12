@@ -67,6 +67,35 @@
   </div>
 </div>
 
+<div>
+  NG STEPS
+
+  <nz-steps [nzCurrent]="current" class="flex items-center border">
+    <nz-step nzTitle="Shipping Address"></nz-step>
+    <nz-step nzTitle="Payment Details"></nz-step>
+  </nz-steps>
+
+  <div class="flex flex-col items-center justify-center mt-4">{{ index }}</div>
+
+  <ng-container [ngSwitch]="current">
+    <ng-container *ngSwitchCase="0">
+      <app-checkout-address></app-checkout-address>
+    </ng-container>
+    <ng-container *ngSwitchCase="1">
+      <app-checkout></app-checkout>
+    </ng-container>
+  </ng-container>
+
+  <div class="flex flex-row gap-1">
+    <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+      <span>Shipping Address</span>
+    </button>
+    <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+      <span>Payment Details</span>
+    </button>
+  </div>
+</div>
+
 <nz-alert
   class="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-2/4"
   nzType="success"

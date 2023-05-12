@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   title = 'Stripe Ecommerce';
   isLoggedIn = false;
   cart = 0;
+  currentRoute = '';
 
   constructor(
     public fireAuthService: AuthService,
@@ -29,6 +30,8 @@ export class AppComponent implements OnInit {
         )
       )
       .subscribe((event: NavigationEnd) => {
+        console.log(event.url);
+        this.currentRoute = event.url;
         this.onDashboard = event.url === '/dashboard';
       });
 

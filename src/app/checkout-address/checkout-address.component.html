@@ -3,67 +3,8 @@
     <h1 class="text-2xl font-semibold">Checkout</h1>
   </div>
 
-  <div
-    class="flex flex-col md:flex-row items-center justify-between md:w-[30rem] text-base my-4 px-4"
-  >
-    <h2 class="flex flex-row gap-2 items-center justify-center">
-      <span
-        nz-icon
-        nzType="check-circle"
-        [nzTheme]="shipping_details === true ? 'fill' : 'outline'"
-      ></span>
-      Shipping Address
-    </h2>
-    <h2 class="flex flex-row gap-2 items-center justify-center">
-      <span
-        nz-icon
-        nzType="check-circle"
-        [nzTheme]="payment_details === true ? 'fill' : 'outline'"
-      ></span>
-      Payment Details
-    </h2>
-  </div>
-
   <div class="flex flex-col p-4 h-2/4">
-    <h2 class="text-lg">
-      {{ shipping_details ? "Shipping Details" : "Order summary" }}
-    </h2>
-
-    <div *ngIf="isLoading" class="text-center my-4">
-      <!-- Show loading indicator or message while loading -->
-      <p>Loading cart items...</p>
-    </div>
-
-    <div *ngIf="!isLoading">
-      <div class="flex flex-nowrap flex-col mt-2">
-        <div class="flex flex-row justify-between font-semibold">
-          <span>Name</span>
-          <span>Subtotal</span>
-        </div>
-        <ul *ngFor="let item of checkout_cart" class="mt-4">
-          <li class="flex flex-row justify-between">
-            <div class="flex flex-col">
-              <span>
-                {{ item.product_name }}
-              </span>
-
-              <span class="text-slate-400">Quantity: {{ item.quantity }}</span>
-            </div>
-
-            <span>{{ item.line_total.formatted_with_symbol }}</span>
-          </li>
-        </ul>
-
-        <div class="mt-2 flex flex-row justify-between">
-          <h2 class="font-semibold text-base">Total</h2>
-          <h2 class="font-semibold text-base">{{ total_price }}</h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex justify-end mt-4">
-      <button nz-button nzType="primary" (click)="pay()">Pay</button>
-    </div>
+    <h2 class="text-lg">Shipping Details</h2>
   </div>
 </div>
 

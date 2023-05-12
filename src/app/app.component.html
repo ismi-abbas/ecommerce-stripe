@@ -1,17 +1,17 @@
 <nz-layout class="min-h-screen">
   <nz-page-header (nzBack)="onBack()" [nzGhost]="false" class="shadow-md">
     <nz-page-header-title
-      (click)="router.navigate(['/'])"
+      (click)="router.navigate(['dashboard'])"
       class="cursor-pointer"
       >{{ title }}
     </nz-page-header-title>
 
-    <nz-breadcrumb>
-      <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-      <nz-breadcrumb-item>
+    <nz-breadcrumb nz-page-header-breadcrumb>
+      <nz-breadcrumb-item>{{ currentRoute | titlecase }}</nz-breadcrumb-item>
+      <!-- <nz-breadcrumb-item>
         <a>Application List</a>
       </nz-breadcrumb-item>
-      <nz-breadcrumb-item>An Application</nz-breadcrumb-item>
+      <nz-breadcrumb-item>An Application</nz-breadcrumb-item> -->
     </nz-breadcrumb>
 
     <nz-page-header-extra class="flex flex-row justify-between items-center">

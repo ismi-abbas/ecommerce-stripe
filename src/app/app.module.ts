@@ -31,6 +31,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { StripePaymentComponent } from './stripe-payment/stripe-payment.component';
 import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CheckoutPaymentDetailsComponent } from './checkout-payment-details/checkout-payment-details.component';
 
 registerLocaleData(en);
 
@@ -44,6 +45,7 @@ registerLocaleData(en);
     StripePaymentComponent,
     CheckoutAddressComponent,
     ShoppingCartComponent,
+    CheckoutPaymentDetailsComponent,
   ],
   imports: [
     BrowserModule,
