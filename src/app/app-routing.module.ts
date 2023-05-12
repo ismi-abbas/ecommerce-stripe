@@ -1,4 +1,3 @@
-import { AuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -7,8 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
+import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
   {
@@ -21,18 +19,22 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'checkout',
     component: CheckoutComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'checkout-address',
     component: CheckoutAddressComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

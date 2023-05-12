@@ -23,11 +23,8 @@ export class AuthGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!this.auth.isLoggedIn) {
-      this.router.navigate(['login']);
-      return false;
-    }
-
-    return true;
+    console.log('AuthGuard#canActivate called ===>', this.auth.loggedIn);
+    if (!this.auth.loggedIn) this.router.navigate(['login']);
+    return this.auth.loggedIn;
   }
 }

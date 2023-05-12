@@ -3,33 +3,45 @@
     <nz-page-header-title
       (click)="router.navigate(['/'])"
       class="cursor-pointer"
-      >{{ title }}</nz-page-header-title
-    >
-    <nz-page-header-extra>
+      >{{ title }}
+    </nz-page-header-title>
+
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        <a>Application List</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>An Application</nz-breadcrumb-item>
+    </nz-breadcrumb>
+
+    <nz-page-header-extra class="flex flex-row justify-between items-center">
       <div class="flex gap-2">
         <!-- Button section -->
         <button
+          *ngIf="isLoggedIn"
           nz-button
           nzType="primary"
           routerLink="/login"
           (click)="fireAuthService.logout()"
         >
-          {{ isLoggedIn ? "Logout" : "Login" }}
+          Logout
         </button>
         <button *ngIf="!isLoggedIn" nz-button routerLink="/register">
           Register
         </button>
 
-        <nz-badge [nzCount]="cart">
-          <a routerLink="/cart">
-            <span
-              nz-icon
-              nzType="shopping-cart"
-              nzTheme="outline"
-              class="text-xl"
-            ></span>
-          </a>
-        </nz-badge>
+        <div *ngIf="isLoggedIn">
+          <nz-badge [nzCount]="cart">
+            <a routerLink="/shopping-cart">
+              <span
+                nz-icon
+                nzType="shopping-cart"
+                nzTheme="outline"
+                class="text-xl"
+              ></span>
+            </a>
+          </nz-badge>
+        </div>
       </div>
     </nz-page-header-extra>
   </nz-page-header>
