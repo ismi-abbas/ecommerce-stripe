@@ -4,6 +4,7 @@ import {
   UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,10 @@ export class RegisterComponent {
     }
   }
 
-  constructor(private fb: UntypedFormBuilder) {}
+  constructor(
+    private fb: UntypedFormBuilder,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -36,5 +40,15 @@ export class RegisterComponent {
       name: [null, [Validators.required]],
       remember: [true],
     });
+  }
+
+  register() {
+    console.log('register', this.validateForm.value);
+    this.authService
+      .register(this.validateForm.value.email, this.validateForm.value.password)
+      .then((res) => {})
+      .catch((err) => {
+        alert(err.message);
+      });
   }
 }

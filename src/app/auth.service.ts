@@ -61,4 +61,22 @@ export class AuthService {
       this.router.navigate(['login']);
     });
   }
+
+  async register(email: string, password: string) {
+    return this.fireauth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        console.log('Register ===>', result);
+        this.setUserData(result.user);
+        this.fireauth.authState.subscribe((user) => {
+          if (user) {
+            this.router.navigate(['dashboard']);
+          }
+        });
+        return result.user;
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
 }
