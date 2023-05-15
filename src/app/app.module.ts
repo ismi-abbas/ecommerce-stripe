@@ -16,22 +16,22 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 // Components
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 // Ant Design
 import { AntDesignModule } from './ant-design/ant-design.module';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 // Services
-import { AuthService } from './auth.service';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { StripePaymentComponent } from './stripe-payment/stripe-payment.component';
-import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { CheckoutPaymentDetailsComponent } from './checkout-payment-details/checkout-payment-details.component';
+import { AuthService } from './services/auth.service';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { StripePaymentComponent } from './components/stripe-payment/stripe-payment.component';
+import { CheckoutAddressComponent } from './components/checkout-address/checkout-address.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { CheckoutPaymentDetailsComponent } from './components/checkout-payment-details/checkout-payment-details.component';
 
 registerLocaleData(en);
 
