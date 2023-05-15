@@ -37,7 +37,7 @@ export class DashboardComponent {
   }
 
   getProducts() {
-    this.isLoading = false;
+    this.isLoading = true;
     this.commercejs.getProducts().subscribe((products) => {
       console.log('products from observable', products);
       this.isLoading = false;

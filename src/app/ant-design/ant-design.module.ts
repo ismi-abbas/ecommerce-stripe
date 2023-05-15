@@ -19,6 +19,9 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 import {
   AccountBookFill,
@@ -63,6 +66,9 @@ const icons: IconDefinition[] = [
     NzAlertModule,
     NzSkeletonModule,
     NzStepsModule,
+    NzSpinModule,
+    NzMessageModule,
+    NzResultModule,
   ],
   exports: [
     NzLayoutModule,
@@ -82,6 +88,9 @@ const icons: IconDefinition[] = [
     NzAlertModule,
     NzSkeletonModule,
     NzStepsModule,
+    NzSpinModule,
+    NzMessageModule,
+    NzResultModule,
   ],
 })
 export class AntDesignModule {}

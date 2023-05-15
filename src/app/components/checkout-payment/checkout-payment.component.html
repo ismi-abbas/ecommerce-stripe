@@ -1,0 +1,42 @@
+<div class="p-4 rounded-md mx-4 my-2 md:mx-auto w-full">
+  <div class="flex flex-col p-4 h-2/4">
+    <h2 class="text-lg">
+      {{ shipping_details ? "Shipping Details" : "Order summary" }}
+    </h2>
+
+    <div *ngIf="isLoading" class="text-center my-4">
+      <nz-spin nzSimple></nz-spin>
+    </div>
+
+    <div *ngIf="!isLoading">
+      <div class="flex flex-nowrap flex-col mt-2">
+        <div class="flex flex-row justify-between font-semibold">
+          <span>Name</span>
+          <span>Subtotal</span>
+        </div>
+        <ul *ngFor="let item of checkout_cart" class="mt-4">
+          <li class="flex flex-row justify-between">
+            <div class="flex flex-col">
+              <span>
+                {{ item.product_name }}
+              </span>
+
+              <span class="text-slate-400">Quantity: {{ item.quantity }}</span>
+            </div>
+
+            <span>{{ item.line_total.formatted_with_symbol }}</span>
+          </li>
+        </ul>
+
+        <div class="mt-2 flex flex-row justify-between">
+          <h2 class="font-semibold text-base">Total</h2>
+          <h2 class="font-semibold text-base">{{ total_price }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-end mt-4">
+      <button nz-button nzType="primary" (click)="pay()">Pay</button>
+    </div>
+  </div>
+</div>

@@ -1,24 +1,14 @@
 <div class="flex w-full flex-col pb-8">
   <div class="flex mx-auto flex-col mt-4 mb-4 text-center">
     <h1 class="text-3xl font-semibold">Store</h1>
-    <!-- <div>
-      <nz-badge
-        [nzCount]="cart_items"
-        (click)="router.navigate(['shopping-cart'])"
-      >
-        <a routerLink="/cart">
-          <span
-            nz-icon
-            nzType="shopping-cart"
-            nzTheme="outline"
-            class="text-xl"
-          ></span>
-        </a>
-      </nz-badge>
-    </div> -->
   </div>
+
+  <div *ngIf="isLoading" class="text-center my-4">
+    <nz-spin nzSimple nzSize="large"></nz-spin>
+  </div>
+
   <div
-    class="grid md:grid-cols-3 xl:grid-cols-4 gap-2 md:mx-4 mx-0"
+    class="grid md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:mx-4 mx-0"
     *ngIf="!isLoading"
   >
     <div *ngFor="let product of products">

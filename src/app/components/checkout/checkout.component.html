@@ -1,105 +1,78 @@
-<div class="shadow-lg p-4 rounded-md mx-4 my-2 md:mx-auto">
-  <div class="flex justify-center">
-    <h1 class="text-2xl font-semibold">Checkout</h1>
+<div
+  class="pt-4 px-4 md:px-8 pb-8 rounded-md mx-4 md:mx-auto md:min-w-full mt-4 shadow-md bg-white"
+>
+  <div class="flex items-center justify-center py-4 mb-2">
+    <h1 class="font-semibold text-2xl">Checkout</h1>
   </div>
 
-  <div
-    class="flex flex-col md:flex-row items-center justify-between md:w-[30rem] text-base my-4 px-4"
-  >
-    <h2 class="flex flex-row gap-2 items-center justify-center">
-      <span
-        nz-icon
-        nzType="check-circle"
-        [nzTheme]="shipping_details === true ? 'fill' : 'outline'"
-      ></span>
-      Shipping Address
-    </h2>
-    <h2 class="flex flex-row gap-2 items-center justify-center">
-      <span
-        nz-icon
-        nzType="check-circle"
-        [nzTheme]="payment_details === true ? 'fill' : 'outline'"
-      ></span>
-      Payment Details
-    </h2>
-  </div>
+  <div class="max-w-screen-sm md:max-w-screen-2xl">
+    <nz-steps [nzCurrent]="current" class="flex items-center">
+      <nz-step nzTitle="Shipping Address"></nz-step>
+      <nz-step nzTitle="Payment Details"></nz-step>
+    </nz-steps>
 
-  <div class="flex flex-col p-4 h-2/4">
-    <h2 class="text-lg">
-      {{ shipping_details ? "Shipping Details" : "Order summary" }}
-    </h2>
-
-    <div *ngIf="loading" class="text-center my-4">
-      <!-- Show loading indicator or message while loading -->
-      <p>Loading cart items...</p>
-    </div>
-
-    <div *ngIf="!loading">
-      <div class="flex flex-nowrap flex-col mt-2">
-        <div class="flex flex-row justify-between font-semibold">
-          <span>Name</span>
-          <span>Subtotal</span>
-        </div>
-        <ul *ngFor="let item of checkout_cart" class="mt-4">
-          <li class="flex flex-row justify-between">
-            <div class="flex flex-col">
-              <span>
-                {{ item.product_name }}
-              </span>
-
-              <span class="text-slate-400">Quantity: {{ item.quantity }}</span>
-            </div>
-
-            <span>{{ item.line_total.formatted_with_symbol }}</span>
-          </li>
-        </ul>
-
-        <div class="mt-2 flex flex-row justify-between">
-          <h2 class="font-semibold text-base">Total</h2>
-          <h2 class="font-semibold text-base">{{ total_price }}</h2>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex justify-end mt-4">
-      <button nz-button nzType="primary" (click)="pay()">Pay</button>
-    </div>
-  </div>
-</div>
-
-<div>
-  NG STEPS
-
-  <nz-steps [nzCurrent]="current" class="flex items-center border">
-    <nz-step nzTitle="Shipping Address"></nz-step>
-    <nz-step nzTitle="Payment Details"></nz-step>
-  </nz-steps>
-
-  <div class="flex flex-col items-center justify-center mt-4">{{ index }}</div>
-
-  <ng-container [ngSwitch]="current">
-    <ng-container *ngSwitchCase="0">
-      <app-checkout-address></app-checkout-address>
+    <ng-container [ngSwitch]="current">
+      <ng-container *ngSwitchCase="0">
+        <checkout-address></checkout-address>
+      </ng-container>
+      <ng-container *ngSwitchCase="1">
+        <checkout-payment></checkout-payment>
+      </ng-container>
+      <ng-container *ngSwitchCase="2">
+        <nz-result
+          nzStatus="success"
+          nzTitle="Successfully Purchased Cloud Server ECS!"
+          nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+        >
+          <div nz-result-extra>
+            <button nz-button nzType="primary">Go Console</button>
+            <button nz-button>Buy Again</button>
+          </div>
+        </nz-result>
+      </ng-container>
     </ng-container>
-    <ng-container *ngSwitchCase="1">
-      <app-checkout></app-checkout>
-    </ng-container>
-  </ng-container>
 
-  <div class="flex flex-row gap-1">
-    <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
-      <span>Shipping Address</span>
-    </button>
-    <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
-      <span>Payment Details</span>
-    </button>
+    <div class="flex flex-row gap-1 mt-4">
+      <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+        <span>Previous</span>
+      </button>
+      <button nz-button nzType="default" (click)="next()" *ngIf="current < 1">
+        <span>Next</span>
+      </button>
+      <button nz-button nzType="primary" (click)="done()" *ngIf="current === 1">
+        <span>Pay</span>
+      </button>
+    </div>
   </div>
 </div>
 
 <nz-alert
   class="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-2/4"
   nzType="success"
-  nzMessage="Payment Successful"
-  *ngIf="success"
+  nzMessage="Processing Payment"
+  *ngIf="isPaymentProcessing"
   nzShowIcon
-></nz-alert>
+>
+</nz-alert>
+
+<nz-alert
+  class="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-2/4"
+  nzType="success"
+  nzMessage="Processing Payment"
+  *ngIf="isPaymentProcessing"
+  nzShowIcon
+>
+</nz-alert>
+
+<nz-alert
+  class="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-2/4"
+  nzType="warning"
+  [nzMessage]="
+    checkout_cart.length === 0 && !isCartLoading
+      ? 'No items in cart. Please add something'
+      : 'Please wait while we load your cart'
+  "
+  *ngIf="isCartLoading"
+  nzShowIcon
+>
+</nz-alert>
