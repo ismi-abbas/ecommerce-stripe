@@ -5,6 +5,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,8 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   title = 'Login';
   validateForm!: UntypedFormGroup;
+  invalidLogin: boolean = false;
+  invalidLoginMessage: string = '';
 
   errorMessage = {
     email: [
@@ -23,20 +26,34 @@ export class LoginComponent {
     password: [{ type: 'required', message: 'Please input your email' }],
   };
 
-  constructor(private fb: UntypedFormBuilder, private auth: AuthService) {}
+  constructor(
+    private fb: UntypedFormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
-  submitForm(): void {
+  async submitForm() {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
 
-      this.auth
-        .login(this.validateForm.value.email, this.validateForm.value.password)
-        .then((res) => {
-          console.log('submitForm login =>', res);
-        })
-        .catch((err) => {
-          console.log('err', err);
-        });
+      (
+        await this.auth.login(
+          this.validateForm.value.email,
+          this.validateForm.value.password
+        )
+      ).subscribe(
+        (res: any) => {
+          this.router.navigate(['/dashboard']);
+          this.invalidLogin = false;
+        },
+        (err: any) => {
+          this.invalidLogin = true;
+          this.invalidLoginMessage = err.message;
+          setTimeout(() => {
+            this.invalidLogin = false;
+          }, 5000);
+        }
+      );
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
