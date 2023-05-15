@@ -1,7 +1,7 @@
 import { Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './auth.service';
-import { CartService } from './cart.service';
+import { AuthService } from './services/auth.service';
+import { CartService } from './services/cart.service';
 import { filter } from 'rxjs/operators';
 
 @Component({

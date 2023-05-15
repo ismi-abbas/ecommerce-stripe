@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import Commerce from '@chec/commerce.js';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import { Product } from '@chec/commerce.js/types/product';
 
 @Injectable({

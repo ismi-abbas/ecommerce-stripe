@@ -1,6 +1,6 @@
 import { Component, Input, Output } from '@angular/core';
-import { CommercejsService } from '../commercejs.service';
-import { CartService } from '../cart.service';
+import { CommercejsService } from '../../services/commercejs.service';
+import { CartService } from '../../services/cart.service';
 import { Cart } from '@chec/commerce.js/types/cart';
 import { Router } from '@angular/router';
 

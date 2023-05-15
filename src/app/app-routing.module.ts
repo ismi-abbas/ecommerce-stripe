@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { CheckoutAddressComponent } from './components/checkout-address/checkout-address.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [

@@ -1,6 +1,6 @@
 import { Injectable, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from './user';
+import { User } from '../user';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
