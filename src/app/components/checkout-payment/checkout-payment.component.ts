@@ -3,15 +3,16 @@ import { CartService } from '../../services/cart.service';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-checkout-address',
-  templateUrl: './checkout-address.component.html',
-  styleUrls: ['./checkout-address.component.css'],
+  selector: 'checkout-payment',
+  templateUrl: './checkout-payment.component.html',
+  styleUrls: ['./checkout-payment.component.css'],
 })
-export class CheckoutAddressComponent {
+export class CheckoutPayment {
   success = false;
   payment_details = true;
   shipping_details = false;
   total_price = 0;
+  loading: boolean = false;
 
   checkout_cart: any = [];
   isLoading: boolean = false;
@@ -28,7 +29,6 @@ export class CheckoutAddressComponent {
         map((cartItems) => {
           this.checkout_cart = cartItems.line_items;
           this.total_price = cartItems.subtotal.formatted_with_symbol;
-          console.log('checkout_cart', cartItems);
           this.isLoading = false;
         })
       )

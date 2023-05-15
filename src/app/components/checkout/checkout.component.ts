@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -16,7 +17,13 @@ export class CheckoutComponent {
   checkout_cart: any = [];
   loading: boolean = false;
 
-  constructor(public cartService: CartService) {
+  // payment
+  isPaymentProcessing = false;
+  isPaymentSuccessful = false;
+  isPaymentFailed = false;
+  isCartLoading = false;
+
+  constructor(public cartService: CartService, private router: Router) {
     this.loadCartItems();
   }
 
@@ -48,11 +55,10 @@ export class CheckoutComponent {
 
   current = 0;
 
-  index = 'First-content';
-
   pre(): void {
     this.current -= 1;
     this.changeContent();
+    this.isPaymentProcessing = false;
   }
 
   next(): void {
@@ -60,26 +66,35 @@ export class CheckoutComponent {
     this.changeContent();
   }
 
+  // payment
   done(): void {
-    console.log('done');
+    if (this.checkout_cart.length > 0) {
+      this.isPaymentProcessing = true;
+      setTimeout(() => {
+        this.isPaymentProcessing = false;
+        this.isPaymentSuccessful = true;
+        this.router.navigate(['/payment-success']);
+      }, 4000);
+    } else {
+      this.isCartLoading = true;
+      setTimeout(() => {
+        this.isCartLoading = false;
+      }, 4000);
+    }
   }
 
   changeContent(): void {
     switch (this.current) {
       case 0: {
-        this.index = 'First';
         break;
       }
       case 1: {
-        this.index = 'Second-content';
         break;
       }
       case 2: {
-        this.index = 'third-content';
         break;
       }
       default: {
-        this.index = 'error';
       }
     }
   }

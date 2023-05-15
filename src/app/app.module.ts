@@ -29,9 +29,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthService } from './services/auth.service';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { StripePaymentComponent } from './components/stripe-payment/stripe-payment.component';
-import { CheckoutAddressComponent } from './components/checkout-address/checkout-address.component';
+import { CheckoutPayment } from './components/checkout-payment/checkout-payment.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
-import { CheckoutPaymentDetailsComponent } from './components/checkout-payment-details/checkout-payment-details.component';
+import { CheckoutAddress } from './components/checkout-payment-details/checkout-address.component';
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 
 registerLocaleData(en);
 
@@ -43,9 +44,10 @@ registerLocaleData(en);
     DashboardComponent,
     CheckoutComponent,
     StripePaymentComponent,
-    CheckoutAddressComponent,
+    CheckoutPayment,
     ShoppingCartComponent,
-    CheckoutPaymentDetailsComponent,
+    CheckoutAddress,
+    PaymentSuccessComponent,
   ],
   imports: [
     BrowserModule,

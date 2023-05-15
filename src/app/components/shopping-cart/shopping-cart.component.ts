@@ -14,6 +14,7 @@ export class ShoppingCartComponent {
   cart_items: any;
   total_cost: string = '';
   cartId: string = '';
+  isLoading: boolean = false;
 
   constructor(public cartService: CartService, private router: Router) {
     this.getCartItems();
@@ -22,7 +23,7 @@ export class ShoppingCartComponent {
 
   ngOnInit(): void {}
 
-  getCartId() {
+  async getCartId() {
     let id = this.cartService.getCartId();
     console.log('getCartId', id);
     return id;
@@ -58,9 +59,11 @@ export class ShoppingCartComponent {
     });
   }
 
-  getCartItems(): void {
+  async getCartItems() {
+    this.isLoading = true;
     this.cartService.getCartItems().subscribe((cart_item) => {
       this.cart_list = cart_item.line_items;
+      this.isLoading = false;
       console.log('getCartItems', cart_item);
       this.cart_items = cart_item;
     });

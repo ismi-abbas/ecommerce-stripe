@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -27,33 +28,26 @@ export class LoginComponent {
   };
 
   constructor(
-    private fb: UntypedFormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private auth: AuthService,
     private router: Router
   ) {}
 
   async submitForm() {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
-
-      (
-        await this.auth.login(
-          this.validateForm.value.email,
-          this.validateForm.value.password
-        )
-      ).subscribe(
-        (res: any) => {
-          this.router.navigate(['/dashboard']);
-          this.invalidLogin = false;
-        },
-        (err: any) => {
-          this.invalidLogin = true;
-          this.invalidLoginMessage = err.message;
-          setTimeout(() => {
-            this.invalidLogin = false;
-          }, 5000);
-        }
-      );
+      this.auth
+        .login(this.validateForm.value.email, this.validateForm.value.password)
+        .subscribe({
+          next: (res) => {
+            this.router.navigate(['/dashboard']);
+          },
+          error: (err) => {
+            this.invalidLogin = true;
+            this.invalidLoginMessage = err.message;
+            console.log('Firebase error', err.message);
+            setTimeout(() => (this.invalidLogin = false), 5000);
+          },
+        });
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -65,10 +59,10 @@ export class LoginComponent {
   }
 
   ngOnInit(): void {
-    this.validateForm = this.fb.group({
+    this.validateForm = this.formBuilder.group({
       email: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      remember: [true],
+      remember: [false],
     });
   }
 }

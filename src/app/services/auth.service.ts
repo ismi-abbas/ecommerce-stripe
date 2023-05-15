@@ -28,24 +28,7 @@ export class AuthService {
     });
   }
 
-  // async login(email: string, password: string) {
-  //   return this.fireauth
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then((result) => {
-  //       this.setUserData(result.user);
-  //       this.fireauth.authState.subscribe((user) => {
-  //         if (user) {
-  //           this.router.navigate(['dashboard']);
-  //         }
-  //       });
-  //       return result.user;
-  //     })
-  //     .catch((error) => {
-  //       return error.message;
-  //     });
-  // }
-
-  async login(email: string, password: string): Promise<Observable<any>> {
+  login(email: string, password: string): Observable<any> {
     return from(this.fireauth.signInWithEmailAndPassword(email, password)).pipe(
       tap((result) => {
         this.setUserData(result.user);
@@ -63,12 +46,14 @@ export class AuthService {
     return user !== null;
   }
 
-  async logout() {
-    return this.fireauth.signOut().then(() => {
-      this.isLoggedIn = false;
-      localStorage.removeItem('user');
-      this.router.navigate(['login']);
-    });
+  logout(): Observable<any> {
+    return from(this.fireauth.signOut()).pipe(
+      tap(() => {
+        this.isLoggedIn = false;
+        localStorage.removeItem('user');
+        this.router.navigate(['login']);
+      })
+    );
   }
 
   async register(email: string, password: string) {

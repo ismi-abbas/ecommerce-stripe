@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   cart = 0;
   currentRoute = '';
+  isLoggedOut = false;
 
   constructor(
     public fireAuthService: AuthService,
@@ -44,5 +45,11 @@ export class AppComponent implements OnInit {
 
   onBack(): void {
     window.history.back();
+  }
+
+  logout() {
+    this.fireAuthService.logout();
+    this.isLoggedOut = true;
+    setTimeout(() => (this.isLoggedOut = false), 2000);
   }
 }
