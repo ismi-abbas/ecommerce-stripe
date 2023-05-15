@@ -1,8 +1,7 @@
 import { Injectable, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../user';
-import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable, from, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +9,14 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class AuthService {
   userData: any;
   isLoggedIn: boolean = false;
+  authState: any = null;
 
   constructor(
     private fireauth: AngularFireAuth,
     private router: Router,
     public ngZone: NgZone
   ) {
-    this.fireauth.authState.subscribe((user) => {
+    this.authState = this.fireauth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -28,21 +28,30 @@ export class AuthService {
     });
   }
 
-  async login(email: string, password: string) {
-    return this.fireauth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
+  // async login(email: string, password: string) {
+  //   return this.fireauth
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then((result) => {
+  //       this.setUserData(result.user);
+  //       this.fireauth.authState.subscribe((user) => {
+  //         if (user) {
+  //           this.router.navigate(['dashboard']);
+  //         }
+  //       });
+  //       return result.user;
+  //     })
+  //     .catch((error) => {
+  //       return error.message;
+  //     });
+  // }
+
+  async login(email: string, password: string): Promise<Observable<any>> {
+    return from(this.fireauth.signInWithEmailAndPassword(email, password)).pipe(
+      tap((result) => {
         this.setUserData(result.user);
-        this.fireauth.authState.subscribe((user) => {
-          if (user) {
-            this.router.navigate(['dashboard']);
-          }
-        });
         return result.user;
       })
-      .catch((error) => {
-        window.alert(error.message);
-      });
+    );
   }
 
   setUserData(user: any) {
