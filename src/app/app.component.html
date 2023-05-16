@@ -44,29 +44,59 @@
         >
           <ng-container *nzDrawerContent>
             <ul class="font-medium flex flex-col">
+              <li *ngIf="!isLoggedIn">
+                <a
+                  routerLink="/register"
+                  class="py-2 pl-3 pr-4 rounded text-gray-700 flex items-center justify-start"
+                  routerLinkActive="text-blue-700 dark:text-blue-500"
+                >
+                  <i
+                    nz-icon
+                    [nzType]="isLoggedIn ? 'login' : 'logout'"
+                    class="mr-2"
+                  ></i>
+
+                  {{ !isLoggedIn ? "Register" : "Logout" }}</a
+                >
+              </li>
               <li *ngIf="isLoggedIn">
                 <a
                   [routerLink]="isLoggedIn ? '/dashboard' : '/login'"
-                  class="block py-2 pl-3 pr-4 rounded"
+                  class="block py-2 pl-3 pr-4 rounded text-gray-700"
                   routerLinkActive="text-blue-700 dark:text-blue-500"
-                  >Store</a
+                >
+                  <i nz-icon nzType="shopping" class="mr-2"></i>
+                  Store</a
                 >
               </li>
               <li *ngIf="isLoggedIn">
                 <a
                   (click)="this.fireAuthService.logout()"
-                  class="block py-2 pl-3 pr-4 rounded"
+                  class="block py-2 pl-3 pr-4 rounded text-gray-700"
                   routerLinkActive="text-blue-700 dark:text-blue-500"
-                  >Logout</a
                 >
+                  <i
+                    nz-icon
+                    [nzType]="isLoggedIn ? 'login' : 'logout'"
+                    class="mr-2"
+                  ></i>
+                  {{ !isLoggedIn ? "Register" : "Logout" }}
+                </a>
               </li>
               <li *ngIf="isLoggedIn">
                 <a
                   routerLink="/shopping-cart"
-                  class="block py-2 pl-3 pr-4 rounded"
+                  class="py-2 pl-3 pr-4 rounded text-gray-700 flex items-center justify-start"
                   routerLinkActive="text-blue-700 dark:text-blue-500"
                   nzTheme="outline"
-                  >Cart</a
+                >
+                  <i
+                    nz-icon
+                    nzType="shopping-cart"
+                    nzTheme="outline"
+                    class="mr-2"
+                  ></i>
+                  Cart</a
                 >
               </li>
             </ul>

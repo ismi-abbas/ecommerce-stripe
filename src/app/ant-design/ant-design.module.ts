@@ -33,6 +33,10 @@ import {
   ShoppingOutline,
   CheckCircleFill,
   CheckCircleOutline,
+  ShopTwoTone,
+  ShopFill,
+  LogoutOutline,
+  LoginOutline,
 } from '@ant-design/icons-angular/icons';
 
 const icons: IconDefinition[] = [
@@ -44,6 +48,11 @@ const icons: IconDefinition[] = [
   ShoppingOutline,
   CheckCircleFill,
   CheckCircleOutline,
+  ShopTwoTone,
+  ShopFill,
+  ShoppingOutline,
+  LogoutOutline,
+  LoginOutline,
 ];
 
 @NgModule({
