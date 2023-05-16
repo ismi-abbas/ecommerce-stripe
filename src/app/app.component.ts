@@ -49,4 +49,15 @@ export class AppComponent implements OnInit {
     this.isLoggedOut = true;
     setTimeout(() => (this.isLoggedOut = false), 2000);
   }
+
+  // Drawer menu
+  visible = false;
+
+  open(): void {
+    this.visible = true;
+  }
+
+  close(): void {
+    this.visible = false;
+  }
 }

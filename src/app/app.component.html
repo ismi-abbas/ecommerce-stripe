@@ -19,6 +19,7 @@
         class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
         aria-controls="navbar-default"
         aria-expanded="false"
+        (click)="open()"
       >
         <span class="sr-only">Open main menu</span>
         <svg
@@ -34,7 +35,45 @@
             clip-rule="evenodd"
           ></path>
         </svg>
+        <nz-drawer
+          [nzClosable]="true"
+          [nzVisible]="visible"
+          nzPlacement="right"
+          (nzOnClose)="close()"
+          nzWidth="200px"
+        >
+          <ng-container *nzDrawerContent>
+            <ul class="font-medium flex flex-col">
+              <li *ngIf="isLoggedIn">
+                <a
+                  [routerLink]="isLoggedIn ? '/dashboard' : '/login'"
+                  class="block py-2 pl-3 pr-4 rounded"
+                  routerLinkActive="text-blue-700 dark:text-blue-500"
+                  >Store</a
+                >
+              </li>
+              <li *ngIf="isLoggedIn">
+                <a
+                  (click)="this.fireAuthService.logout()"
+                  class="block py-2 pl-3 pr-4 rounded"
+                  routerLinkActive="text-blue-700 dark:text-blue-500"
+                  >Logout</a
+                >
+              </li>
+              <li *ngIf="isLoggedIn">
+                <a
+                  routerLink="/shopping-cart"
+                  class="block py-2 pl-3 pr-4 rounded"
+                  routerLinkActive="text-blue-700 dark:text-blue-500"
+                  nzTheme="outline"
+                  >Cart</a
+                >
+              </li>
+            </ul>
+          </ng-container>
+        </nz-drawer>
       </button>
+
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul
           class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 md:items-center"
