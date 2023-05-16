@@ -3,18 +3,23 @@
     <div
       class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
     >
-      <a href="/" class="flex items-center">
+      <a
+        class="flex items-center"
+        [routerLink]="isLoggedIn ? '/dashboard' : '/login'"
+      >
         <span
           class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
           >{{ title }}</span
         >
       </a>
+
       <button
         data-collapse-toggle="navbar-default"
         type="button"
         class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
         aria-controls="navbar-default"
         aria-expanded="false"
+        (click)="open()"
       >
         <span class="sr-only">Open main menu</span>
         <svg
@@ -30,14 +35,82 @@
             clip-rule="evenodd"
           ></path>
         </svg>
+        <nz-drawer
+          [nzClosable]="true"
+          [nzVisible]="visible"
+          nzPlacement="right"
+          (nzOnClose)="close()"
+          nzWidth="200px"
+        >
+          <ng-container *nzDrawerContent>
+            <ul class="font-medium flex flex-col">
+              <li *ngIf="!isLoggedIn">
+                <a
+                  routerLink="/register"
+                  class="py-2 pl-3 pr-4 rounded text-gray-700 flex items-center justify-start"
+                  routerLinkActive="text-blue-700 dark:text-blue-500"
+                >
+                  <i
+                    nz-icon
+                    [nzType]="isLoggedIn ? 'login' : 'logout'"
+                    class="mr-2"
+                  ></i>
+
+                  {{ !isLoggedIn ? "Register" : "Logout" }}</a
+                >
+              </li>
+              <li *ngIf="isLoggedIn">
+                <a
+                  [routerLink]="isLoggedIn ? '/dashboard' : '/login'"
+                  class="block py-2 pl-3 pr-4 rounded text-gray-700"
+                  routerLinkActive="text-blue-700 dark:text-blue-500"
+                >
+                  <i nz-icon nzType="shopping" class="mr-2"></i>
+                  Store</a
+                >
+              </li>
+              <li *ngIf="isLoggedIn">
+                <a
+                  (click)="this.fireAuthService.logout()"
+                  class="block py-2 pl-3 pr-4 rounded text-gray-700"
+                  routerLinkActive="text-blue-700 dark:text-blue-500"
+                >
+                  <i
+                    nz-icon
+                    [nzType]="isLoggedIn ? 'login' : 'logout'"
+                    class="mr-2"
+                  ></i>
+                  {{ !isLoggedIn ? "Register" : "Logout" }}
+                </a>
+              </li>
+              <li *ngIf="isLoggedIn">
+                <a
+                  routerLink="/shopping-cart"
+                  class="py-2 pl-3 pr-4 rounded text-gray-700 flex items-center justify-start"
+                  routerLinkActive="text-blue-700 dark:text-blue-500"
+                  nzTheme="outline"
+                >
+                  <i
+                    nz-icon
+                    nzType="shopping-cart"
+                    nzTheme="outline"
+                    class="mr-2"
+                  ></i>
+                  Cart</a
+                >
+              </li>
+            </ul>
+          </ng-container>
+        </nz-drawer>
       </button>
+
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul
           class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 md:items-center"
         >
           <li *ngIf="isLoggedIn">
             <a
-              routerLink="/dashboard"
+              [routerLink]="isLoggedIn ? '/dashboard' : '/login'"
               class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:p-0"
               routerLinkActive="md:text-blue-700 dark:text-white md:dark:text-blue-500"
               >Store</a
@@ -61,6 +134,7 @@
               nzTheme="outline"
             ></a>
           </li>
+          <span class="text-sm text-white">Cart: {{ cartItemsCount }}</span>
         </ul>
       </div>
     </div>
@@ -71,4 +145,13 @@
   >
     <router-outlet></router-outlet>
   </nz-content>
+
+  <nz-footer>
+    <div class="flex justify-center items-center">
+      <span class="text-gray-700 dark:text-gray-400"
+        >Ecommerce Shop All Right Reserve</span
+      >
+      <a href=""></a>
+    </div>
+  </nz-footer>
 </nz-layout>

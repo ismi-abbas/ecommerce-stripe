@@ -22,6 +22,7 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 import {
   AccountBookFill,
@@ -32,6 +33,10 @@ import {
   ShoppingOutline,
   CheckCircleFill,
   CheckCircleOutline,
+  ShopTwoTone,
+  ShopFill,
+  LogoutOutline,
+  LoginOutline,
 } from '@ant-design/icons-angular/icons';
 
 const icons: IconDefinition[] = [
@@ -43,6 +48,11 @@ const icons: IconDefinition[] = [
   ShoppingOutline,
   CheckCircleFill,
   CheckCircleOutline,
+  ShopTwoTone,
+  ShopFill,
+  ShoppingOutline,
+  LogoutOutline,
+  LoginOutline,
 ];
 
 @NgModule({
@@ -69,6 +79,7 @@ const icons: IconDefinition[] = [
     NzSpinModule,
     NzMessageModule,
     NzResultModule,
+    NzDrawerModule,
   ],
   exports: [
     NzLayoutModule,
@@ -91,6 +102,7 @@ const icons: IconDefinition[] = [
     NzSpinModule,
     NzMessageModule,
     NzResultModule,
+    NzDrawerModule,
   ],
 })
 export class AntDesignModule {}

@@ -13,9 +13,10 @@ export class AppComponent implements OnInit {
   onDashboard: boolean = false;
   title = 'Stripe Ecommerce';
   isLoggedIn = false;
-  cart = 0;
+  cartItemsCount = 0;
   currentRoute = '';
   isLoggedOut = false;
+  notificationText = 'Something';
 
   constructor(
     public fireAuthService: AuthService,
@@ -23,21 +24,17 @@ export class AppComponent implements OnInit {
     public router: Router
   ) {
     this.isLoggedIn = this.fireAuthService.loggedIn;
-    console.log('isLoggedIn', this.isLoggedIn);
-    this.router.events
-      .pipe(
-        filter(
-          (event): event is NavigationEnd => event instanceof NavigationEnd
-        )
-      )
-      .subscribe((event: NavigationEnd) => {
-        console.log(event.url);
-        this.currentRoute = event.url;
-        this.onDashboard = event.url === '/dashboard';
-      });
 
     this.cartService.getCartCount().subscribe((count: number) => {
-      this.cart = count;
+      this.cartItemsCount = count;
+    });
+
+    this.cartService.notificationSubject$.subscribe(
+      (data) => (this.notificationText = data)
+    );
+
+    this.cartService.cartCountSubject$.subscribe((data) => {
+      this.cartItemsCount = data;
     });
   }
 
@@ -51,5 +48,16 @@ export class AppComponent implements OnInit {
     this.fireAuthService.logout();
     this.isLoggedOut = true;
     setTimeout(() => (this.isLoggedOut = false), 2000);
+  }
+  
+  // Drawer menu
+  visible = false;
+
+  open(): void {
+    this.visible = true;
+  }
+
+  close(): void {
+    this.visible = false;
   }
 }
