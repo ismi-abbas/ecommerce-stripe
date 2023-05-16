@@ -8,7 +8,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
   isLoading: boolean = true;

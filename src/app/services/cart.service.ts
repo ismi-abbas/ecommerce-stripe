@@ -1,6 +1,7 @@
 import { CommercejsService } from './commercejs.service';
 import { Injectable } from '@angular/core';
 import { DeleteResponse } from '@chec/commerce.js/features/cart';
+import { Cart } from '@chec/commerce.js/types/cart';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -33,7 +34,7 @@ export class CartService {
     return this.commerce.getCommerce().cart.id();
   }
 
-  addToCart(productId: string) {
+  addToCart(productId: string): Observable<Cart> {
     return from(this.commerce.getCommerce().cart.add(productId, 1)).pipe(
       map((res: any) => {
         this.carts = res.total_items;
@@ -42,7 +43,7 @@ export class CartService {
     );
   }
 
-  updateCart(productId: string, quantity: number) {
+  updateCart(productId: string, quantity: number): Observable<Cart> {
     return from(
       this.commerce.getCommerce().cart.update(productId, { quantity })
     ).pipe(
@@ -55,7 +56,7 @@ export class CartService {
   }
 
   // Clear cart content but not delete the cart
-  emptyCart() {
+  emptyCart(): Observable<Cart> {
     return from(this.commerce.getCommerce().cart.empty()).pipe(
       map((res: any) => {
         this.carts = res.total_items;
@@ -64,7 +65,7 @@ export class CartService {
     );
   }
 
-  deleteCart() {
+  deleteCart(): Observable<any> {
     return from(this.commerce.getCommerce().cart.delete()).pipe(
       map((res: DeleteResponse) => {
         this.carts = 0;
@@ -77,7 +78,7 @@ export class CartService {
     this.cartCountSubject$.next(this.carts++);
   }
 
-  getCartCount(): any {
+  getCartCount(): Observable<any> {
     return from(this.commerce.getCommerce().cart.retrieve()).pipe(
       map((res: any) => {
         this.cartCountSubject$.next(res.total_items);
@@ -86,9 +87,9 @@ export class CartService {
     );
   }
 
-  getCartItems(): Observable<any> {
+  getCartItems(): Observable<Cart> {
     return from(this.commerce.getCommerce().cart.retrieve()).pipe(
-      map((res: any) => res)
+      map((res: Cart) => res)
     );
   }
 

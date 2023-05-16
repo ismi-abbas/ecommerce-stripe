@@ -31,7 +31,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { StripePaymentComponent } from './components/stripe-payment/stripe-payment.component';
 import { CheckoutPayment } from './components/checkout-payment/checkout-payment.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
-import { CheckoutAddress } from './components/checkout-payment-details/checkout-address.component';
+import { CheckoutAddress } from './components/checkout-address/checkout-address.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 
 registerLocaleData(en);

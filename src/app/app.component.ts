@@ -23,15 +23,14 @@ export class AppComponent implements OnInit {
     public cartService: CartService,
     public router: Router
   ) {
-    this.isLoggedIn = this.fireAuthService.loggedIn;
+    this.fireAuthService.isLoginSubject$.subscribe((data) => {
+      console.log('isLoggedInSubject ==>', data);
+      this.isLoggedIn = data;
+    });
 
     this.cartService.getCartCount().subscribe((count: number) => {
       this.cartItemsCount = count;
     });
-
-    this.cartService.notificationSubject$.subscribe(
-      (data) => (this.notificationText = data)
-    );
 
     this.cartService.cartCountSubject$.subscribe((data) => {
       this.cartItemsCount = data;
@@ -49,7 +48,7 @@ export class AppComponent implements OnInit {
     this.isLoggedOut = true;
     setTimeout(() => (this.isLoggedOut = false), 2000);
   }
-  
+
   // Drawer menu
   visible = false;
 

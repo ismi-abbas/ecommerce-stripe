@@ -5,13 +5,12 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'checkout-payment',
   templateUrl: './checkout-payment.component.html',
-  styleUrls: ['./checkout-payment.component.css'],
 })
 export class CheckoutPayment {
   success = false;
   payment_details = true;
   shipping_details = false;
-  total_price = 0;
+  total_price = '0';
   loading: boolean = false;
 
   checkout_cart: any = [];

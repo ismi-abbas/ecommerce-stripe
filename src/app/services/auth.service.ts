@@ -1,12 +1,14 @@
 import { Injectable, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, from, tap } from 'rxjs';
+import { BehaviorSubject, Observable, from, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  public isLoginSubject$: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
   userData: any;
   isLoggedIn: boolean = false;
   authState: any = null;
@@ -21,11 +23,13 @@ export class AuthService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
+        this.isLoginSubject$.next(!!this.userData);
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
     });
+    // set isLoggedInSubject value to true if userData exists
   }
 
   login(email: string, password: string): Observable<any> {

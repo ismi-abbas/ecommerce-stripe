@@ -6,13 +6,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent {
   success = false;
   payment_details = true;
   shipping_details = false;
-  total_price = 0;
+  total_price = '0';
 
   checkout_cart: any = [];
   loading: boolean = false;

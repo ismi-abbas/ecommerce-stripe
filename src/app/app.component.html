@@ -125,16 +125,17 @@
             >
           </li>
           <li *ngIf="isLoggedIn">
-            <a
-              routerLink="/shopping-cart"
-              class="py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:p-0 md:text-lg"
-              routerLinkActive="md:text-blue-700 dark:text-white md:dark:text-blue-500"
-              nz-icon
-              nzType="shopping-cart"
-              nzTheme="outline"
-            ></a>
+            <nz-badge [nzCount]="cartItemsCount" nzSize="small">
+              <a
+                routerLink="/shopping-cart"
+                class="py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:p-0 md:text-lg"
+                routerLinkActive="md:text-blue-700 dark:text-white md:dark:text-blue-500"
+                nz-icon
+                nzType="shopping-cart"
+                nzTheme="outline"
+              ></a>
+            </nz-badge>
           </li>
-          <span class="text-sm text-white">Cart: {{ cartItemsCount }}</span>
         </ul>
       </div>
     </div>

@@ -2,11 +2,12 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { Cart } from '@chec/commerce.js/types/cart';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent {
   divsArray: any[] = Array.from({ length: 8 }, (_, i) => i);
@@ -16,7 +17,11 @@ export class ShoppingCartComponent {
   cartId: string = '';
   isLoading: boolean = false;
 
-  constructor(public cartService: CartService, private router: Router) {
+  constructor(
+    public cartService: CartService,
+    private router: Router,
+    private message: NzMessageService
+  ) {
     this.getCartItems();
     this.getCartId();
   }
@@ -54,12 +59,14 @@ export class ShoppingCartComponent {
 
   emptyCart(): void {
     this.cartService.emptyCart().subscribe((cart) => {
-      console.log('emptyCart', cart);
       this.cart_items = cart;
+      this.cartService.cartCountSubject$.next(0);
+      this.cartService.cartItemSubject$.next([]);
+      this.message.success('Cart emptied');
     });
   }
 
-  async getCartItems() {
+  getCartItems() {
     this.isLoading = true;
     this.cartService.getCartItems().subscribe((cart_item) => {
       this.cart_list = cart_item.line_items;
