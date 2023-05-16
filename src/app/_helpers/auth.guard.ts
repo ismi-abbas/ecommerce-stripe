@@ -13,9 +13,10 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root',
 })
 export class AuthGuard {
+  isLoggedIn: boolean = false;
   constructor(private auth: AuthService, private router: Router) {}
 
-  canActivate(
+  public canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
@@ -23,8 +24,6 @@ export class AuthGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log('AuthGuard#canActivate called ===>', this.auth.loggedIn);
-    if (!this.auth.loggedIn) this.router.navigate(['login']);
-    return this.auth.loggedIn;
+    return this.auth.isLoginSubject$.asObservable();
   }
 }

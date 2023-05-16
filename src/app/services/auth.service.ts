@@ -29,7 +29,6 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user')!);
       }
     });
-    // set isLoggedInSubject value to true if userData exists
   }
 
   login(email: string, password: string): Observable<any> {

@@ -38,7 +38,7 @@ export class LoginComponent {
         .login(this.validateForm.value.email, this.validateForm.value.password)
         .subscribe({
           next: (res) => {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['dashboard']);
           },
           error: (err) => {
             this.invalidLogin = true;

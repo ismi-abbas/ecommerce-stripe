@@ -22,10 +22,14 @@ export class AppComponent implements OnInit {
     public fireAuthService: AuthService,
     public cartService: CartService,
     public router: Router
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.fireAuthService.isLoginSubject$.subscribe((data) => {
-      console.log('isLoggedInSubject ==>', data);
-      this.isLoggedIn = data;
+      if (data) {
+        console.log('isLoggedInSubject ==>', data);
+        this.isLoggedIn = data;
+      }
     });
 
     this.cartService.getCartCount().subscribe((count: number) => {
@@ -37,16 +41,18 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
   onBack(): void {
     window.history.back();
   }
 
   logout() {
-    this.fireAuthService.logout();
     this.isLoggedOut = true;
-    setTimeout(() => (this.isLoggedOut = false), 2000);
+    this.fireAuthService.logout().subscribe((res) => {
+      console.log('logout', res);
+      setTimeout(() => (this.isLoggedOut = false), 2000);
+
+      this.router.navigate(['/']);
+    });
   }
 
   // Drawer menu
