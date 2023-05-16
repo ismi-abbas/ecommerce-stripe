@@ -3,6 +3,7 @@ import { CommercejsService } from '../../services/commercejs.service';
 import { CartService } from '../../services/cart.service';
 import { Cart } from '@chec/commerce.js/types/cart';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,26 +13,23 @@ import { Router } from '@angular/router';
 export class DashboardComponent {
   isLoading: boolean = true;
   products: any[] = [];
-  @Input('cart_items_count') cart_items: number = 0;
-  @Input('isAdded') isAdded: boolean = false;
+  isAdded: boolean = false;
 
   constructor(
     private commercejs: CommercejsService,
     private cartService: CartService,
-    public router: Router
+    public router: Router,
+    private message: NzMessageService
   ) {
     this.getProducts();
-    this.cartService.getCartCount().subscribe((count: number) => {
-      this.cart_items = count;
-    });
   }
 
   ngOnInit() {}
 
   addToCart(productId: string): void {
     this.cartService.addToCart(productId).subscribe((res) => {
-      console.log('addToCart', res.total_items);
-      this.cart_items = res.total_items;
+      this.cartService.cartCountSubject$.next(res.total_items);
+      this.message.success('Product added to cart');
     });
     this.isAdded = true;
   }
@@ -43,5 +41,10 @@ export class DashboardComponent {
       this.isLoading = false;
       this.products = products;
     });
+  }
+
+  sendData(data: any) {
+    console.log('Data send ===>', data.value);
+    this.cartService.sendNotiData(data.value);
   }
 }

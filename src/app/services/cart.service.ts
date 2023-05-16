@@ -1,13 +1,30 @@
 import { CommercejsService } from './commercejs.service';
 import { Injectable } from '@angular/core';
 import { DeleteResponse } from '@chec/commerce.js/features/cart';
-import { Observable, from } from 'rxjs';
+import { BehaviorSubject, Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  private cartSubject$: BehaviorSubject<number> = new BehaviorSubject<number>(
+    0
+  );
+  public carts$: Observable<number> = this.cartSubject$.asObservable();
+
+  public notificationSubject$: BehaviorSubject<string> =
+    new BehaviorSubject<string>('Something in here');
+
+  public cartItemSubject$: BehaviorSubject<any> = new BehaviorSubject<any>(
+    null
+  );
+
+  public cartCountSubject$: BehaviorSubject<number> =
+    new BehaviorSubject<number>(0);
+
+  public cartCount$: Observable<number> = this.cartCountSubject$.asObservable();
+
   carts: number = 0;
 
   constructor(public commerce: CommercejsService) {}
@@ -31,6 +48,7 @@ export class CartService {
     ).pipe(
       map((res: any) => {
         this.carts = res.total_items;
+        this.cartCountSubject$.next(this.carts++);
         return res;
       })
     );
@@ -55,9 +73,16 @@ export class CartService {
     );
   }
 
+  updateCartCount(): void {
+    this.cartCountSubject$.next(this.carts++);
+  }
+
   getCartCount(): any {
     return from(this.commerce.getCommerce().cart.retrieve()).pipe(
-      map((res: any) => res.total_items)
+      map((res: any) => {
+        this.cartCountSubject$.next(res.total_items);
+        return res.total_items;
+      })
     );
   }
 
@@ -65,5 +90,10 @@ export class CartService {
     return from(this.commerce.getCommerce().cart.retrieve()).pipe(
       map((res: any) => res)
     );
+  }
+
+  sendNotiData(data: string) {
+    this.notificationSubject$.next(data);
+    console.log('data received ===>', data);
   }
 }
