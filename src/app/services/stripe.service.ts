@@ -2,23 +2,47 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+declare const Stripe: any;
 @Injectable({
   providedIn: 'root',
 })
 export class StripeService {
-  private stripeUrl = '<https://api.stripe.com/v1>';
+  private stripeUrl = 'https://api.stripe.com/v1';
   private token = '';
 
   constructor(private http: HttpClient) {}
 
-  createToken(card: any): Observable<any> {
+  requestMemberShip(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: `Bearer ${this.token}`,
     });
+    return this.http.post(`${this.stripeUrl}/checkout/sessions`, {
+      headers,
+      success_url: 'https://example.com/success',
+      line_items: [{ price: 'price_H5ggYwtDq4fbrJ', quantity: 2 }],
+      mode: 'payment',
+    });
+  }
 
-    const body = `card[number]=${card.cardNumber}&card[exp_month]=${card.expMonth}&card[exp_year]=${card.expYear}&card[cvc]=${card.cvc}`;
+  getPrice(price: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    return this.http.post(`${this.stripeUrl}/prices`, {
+      headers,
+      body: {
+        unit_amount: price,
+        currency: 'myr',
+      },
+    });
+  }
 
-    return this.http.post(`${this.stripeUrl}/tokens`, body, { headers });
+  redirectToStripeCheckout(): void {
+    const stripe = Stripe(this.token);
+    stripe.redirectToCheckout({
+      items: [{ sku: 'sku_GBJ2kZ0QjXjJZI', quantity: 1 }],
+      successUrl: 'http://localhost:4200/success',
+      cancelUrl: 'http://localhost:4200/cancel',
+    });
   }
 }

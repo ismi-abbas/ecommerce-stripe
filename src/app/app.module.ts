@@ -34,6 +34,10 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { CheckoutAddress } from './components/checkout-address/checkout-address.component';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 
+// Stripe
+import { StripeModule } from 'stripe-angular';
+import { StripeCheckoutComponent } from './components/stripe-checkout/stripe-checkout.component';
+
 registerLocaleData(en);
 
 @NgModule({
@@ -48,6 +52,7 @@ registerLocaleData(en);
     ShoppingCartComponent,
     CheckoutAddress,
     PaymentSuccessComponent,
+    StripeCheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +65,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     AntDesignModule,
+    StripeModule.forRoot(environment.stripe.key),
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

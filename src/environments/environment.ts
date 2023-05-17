@@ -23,5 +23,10 @@ export const environment = {
     accessToken: '1250308041859190785-jJJWf2cIV6lknCDBSDOa2ZRZvTDZ3w',
     accessTokenSecret: 'KhgdYflOIMHsNQR7knjq9B954evaEfeyQP4z79dqJ4aWB',
   },
+  stripe: {
+    key: 'pk_test_51N4FypHwrIsuNEdo8fc2cu0vlijrmlxl2FV7Puj9Wv7hHznkMHgUuEhjgqgJRjpIWe1GeU9Oe3flQUMVMZ3jfJt600gvIuk0i8',
+    secret:
+      'sk_test_51N4FypHwrIsuNEdoBPqr6y138ggxS5uv3JBTmOuWErLCXFrb7wkty0ApTu5e2RIenGRjKLUw9mT9BKHGijfynMnz00iHNx9P3e',
+  },
   production: false,
 };

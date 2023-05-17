@@ -12,6 +12,7 @@ export class CheckoutPayment {
   shipping_details = false;
   total_price = '0';
   loading: boolean = false;
+  checkoutUrl: string = '';
 
   checkout_cart: any = [];
   isLoading: boolean = false;
@@ -19,6 +20,7 @@ export class CheckoutPayment {
   constructor(public cartService: CartService) {
     this.cartService.cartItemSubject$.subscribe((res) => {
       if (res) {
+        this.checkoutUrl = res.hosted_checkout_url;
         this.checkout_cart = res.line_items;
         this.total_price = res.subtotal.formatted_with_symbol;
       }
@@ -27,7 +29,7 @@ export class CheckoutPayment {
 
   ngOnInit(): void {}
 
-  pay() {
+  payWithCommerceJs(paymentUrl: string) {
     this.success = true;
     setTimeout(() => {
       this.success = false;

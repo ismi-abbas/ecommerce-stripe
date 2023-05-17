@@ -1,57 +1,58 @@
-<div class="bg-white p-2 shadow-sm rounded-md w-auto h-auto mx-auto">
-  <div class="flex items-center justify-center py-4 mb-2">
-    <h1 class="font-semibold text-2xl">Checkout</h1>
-  </div>
+<div class="flex h-[90vh] mx-auto">
+  <div class="bg-white p-2 rounded-md mt-10 h-[70%] min-w-full flex flex-col">
+    <div class="flex items-center justify-center py-4 mb-2">
+      <h1 class="font-semibold text-2xl">Checkout</h1>
+    </div>
 
-  <div class="w-full p-2 flex flex-col max-w-lg mx-auto">
-    <nz-steps [nzCurrent]="current" [nzDirection]="nzDirection">
-      <nz-step nzTitle="Shipping Address"></nz-step>
-      <nz-step nzTitle="Payment Details"></nz-step>
-    </nz-steps>
+    <!-- Inside div -->
+    <div class="w-full flex flex-col mx-auto p-8">
+      <div class="w-auto md:w-screen md:max-w-screen-md">
+        <nz-steps [nzCurrent]="current" [nzDirection]="nzDirection">
+          <nz-step nzTitle="Shipping Address"></nz-step>
+          <nz-step nzTitle="Payment Details"></nz-step>
+        </nz-steps>
+      </div>
 
-    <ng-container [ngSwitch]="current">
-      <ng-container *ngSwitchCase="0">
-        <checkout-address></checkout-address>
+      <ng-container [ngSwitch]="current">
+        <ng-container *ngSwitchCase="0">
+          <checkout-address></checkout-address>
+        </ng-container>
+        <ng-container *ngSwitchCase="1">
+          <checkout-payment></checkout-payment>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+          <nz-result
+            nzStatus="success"
+            nzTitle="Successfully Purchased Cloud Server ECS!"
+            nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+          >
+            <div nz-result-extra>
+              <button nz-button nzType="primary">Go Console</button>
+              <button nz-button>Buy Again</button>
+            </div>
+          </nz-result>
+        </ng-container>
       </ng-container>
-      <ng-container *ngSwitchCase="1">
-        <checkout-payment></checkout-payment>
-      </ng-container>
-      <ng-container *ngSwitchCase="2">
-        <nz-result
-          nzStatus="success"
-          nzTitle="Successfully Purchased Cloud Server ECS!"
-          nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+
+      <div class="flex flex-row gap-1 mt-4">
+        <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+          <span>Previous</span>
+        </button>
+        <button nz-button nzType="default" (click)="next()" *ngIf="current < 1">
+          <span>Next</span>
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          (click)="done()"
+          *ngIf="current === 1"
         >
-          <div nz-result-extra>
-            <button nz-button nzType="primary">Go Console</button>
-            <button nz-button>Buy Again</button>
-          </div>
-        </nz-result>
-      </ng-container>
-    </ng-container>
-
-    <div class="flex flex-row gap-1 mt-4">
-      <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
-        <span>Previous</span>
-      </button>
-      <button nz-button nzType="default" (click)="next()" *ngIf="current < 1">
-        <span>Next</span>
-      </button>
-      <button nz-button nzType="primary" (click)="done()" *ngIf="current === 1">
-        <span>Pay</span>
-      </button>
+          <span>Pay</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
-
-<nz-alert
-  class="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-2/4"
-  nzType="success"
-  nzMessage="Processing Payment"
-  *ngIf="isPaymentProcessing"
-  nzShowIcon
->
-</nz-alert>
 
 <nz-alert
   class="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-2/4"
