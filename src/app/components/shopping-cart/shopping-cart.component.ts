@@ -57,8 +57,10 @@ export class ShoppingCartComponent {
     });
   }
 
-  removeFromCart(productId?: string): void {
-    this.cart_items--;
+  removeFromCart(productId: string): void {
+    this.cartService.removeFromCart(productId).subscribe((cart) => {
+      this.message.success('Removed from cart');
+    });
   }
 
   emptyCart(): void {

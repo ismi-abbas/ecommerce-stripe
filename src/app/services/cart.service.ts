@@ -38,14 +38,23 @@ export class CartService {
       this.commerce.getCommerce().cart.update(productId, { quantity })
     ).pipe(
       map((res: any) => {
-        this.carts = res.total_items;
-        this.cartCountSubject$.next(this.carts++);
+        this.cartItemSubject$.next(res);
+        this.cartCountSubject$.next(res.total_items);
         return res;
       })
     );
   }
 
-  // Clear cart content but not delete the cart
+  removeFromCart(productId: string): Observable<Cart> {
+    return from(this.commerce.getCommerce().cart.remove(productId)).pipe(
+      map((res: any) => {
+        this.cartItemSubject$.next(res);
+        this.cartCountSubject$.next(res.total_items);
+        return res;
+      })
+    );
+  }
+
   emptyCart(): Observable<Cart> {
     return from(this.commerce.getCommerce().cart.empty()).pipe(
       map((res: any) => {

@@ -1,79 +1,104 @@
-<div class="container mx-auto mb-4 flex flex-col justify-center items-center">
+<div class="mb-4 flex flex-col justify-center items-center">
   <div class="flex mx-auto flex-col mt-4 mb-4 text-center">
     <h1 class="text-3xl font-semibold text-center">Shopping Cart</h1>
   </div>
 
-  <div *ngIf="isLoading" class="text-center my-4">
-    <nz-spin nzSimple nzSize="large"></nz-spin>
-  </div>
+  <div class="">
+    <div *ngIf="isLoading" class="text-center my-4">
+      <nz-spin nzSimple nzSize="large"></nz-spin>
+    </div>
 
-  <div class="rounded-lg p-4 bg-white container" *ngIf="!isLoading">
+    <div *ngIf="!isLoading && cart_list.length === 0" class="text-center my-4">
+      <nz-result nzStatus="info" nzTitle="No items in cart">
+        <div nz-result-extra>
+          <button nz-button nzType="primary" routerLink="/dashboard">
+            Add item
+          </button>
+        </div>
+      </nz-result>
+    </div>
+
     <div
-      class="grid justify-center md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-3 mt-2 p-4"
+      class="rounded-lg p-4 bg-white container"
+      *ngIf="!isLoading && cart_list.length > 0"
     >
-      <div *ngFor="let item of cart_list" class="w-48 p-4 shadow-md rounded-sm">
-        <div class="w-4/4 h-2/4 items-center p-2">
-          <img
-            src="{{ item?.image.url }}"
-            alt=""
-            class="object-cover w-full h-full"
-          />
-        </div>
+      <div
+        class="grid justify-center md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-3 mt-2 p-4"
+      >
+        <div
+          *ngFor="let item of cart_list"
+          class="w-48 p-4 shadow-md rounded-sm"
+        >
+          <div class="w-4/4 h-2/4 items-center p-2">
+            <img
+              src="{{ item?.image.url }}"
+              alt=""
+              class="object-cover w-full h-full"
+            />
+          </div>
 
-        <div class="p-2 my-2 overflow-x-hidden">
-          <h3 class="text-sm text-start">
-            {{ item?.product_name }}
-          </h3>
-        </div>
+          <div class="p-2 my-2 overflow-x-hidden">
+            <h3 class="text-sm text-start">
+              {{ item?.product_name }}
+            </h3>
+          </div>
 
-        <div class="flex justify-between items-center">
-          <div class="flex justify-evenly w-3/4">
-            <span nz-button nzType="primary" class="text-start">-</span>
-            <span class="text-center">{{ item?.quantity }}</span>
-            <span
+          <div class="flex justify-between items-center">
+            <div class="flex justify-evenly w-3/4">
+              <span
+                nz-button
+                nzType="primary"
+                class="text-start"
+                class="cursor-pointer"
+                (click)="updateCart(item.id, item.quantity - 1)"
+                >-</span
+              >
+              <span class="text-center">{{ item?.quantity }}</span>
+              <span
+                nz-button
+                nzType="primary"
+                (click)="updateCart(item.id, item.quantity + 1)"
+                class="cursor-pointer"
+                >+</span
+              >
+            </div>
+            <button
               nz-button
               nzType="primary"
-              (click)="updateCart(item.id, item.quantity + 1)"
-              class="cursor-pointer"
-              >+</span
+              nzDanger
+              (click)="removeFromCart(item.id)"
             >
+              Remove
+            </button>
           </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between p-2">
+        <div class="ml-2 mr-8">
+          <h3 class="text-base font-medium text-start">
+            Subtotal: {{ cart_items?.subtotal?.formatted_with_symbol }}
+          </h3>
+        </div>
+        <div class="items-center md:float-right gap-2 flex">
           <button
             nz-button
             nzType="primary"
+            class="mt-4"
             nzDanger
-            (click)="removeFromCart()"
+            (click)="emptyCart()"
           >
-            Remove
+            Empty Cart
+          </button>
+          <button
+            nz-button
+            nzType="primary"
+            class="mt-4"
+            (click)="goToCheckout()"
+          >
+            Checkout
           </button>
         </div>
-      </div>
-    </div>
-
-    <div class="flex flex-col md:flex-row items-center justify-between p-2">
-      <div>
-        <h3 class="text-base font-medium text-start">
-          Subtotal: {{ cart_items?.subtotal?.formatted_with_symbol }}
-        </h3>
-      </div>
-      <div class="items-center md:float-right gap-2 flex">
-        <button
-          nz-button
-          nzType="primary"
-          class="mt-4"
-          nzDanger
-          (click)="emptyCart()"
-        >
-          Empty Cart
-        </button>
-        <button
-          nz-button
-          nzType="primary"
-          class="mt-4"
-          (click)="goToCheckout()"
-        >
-          Checkout
-        </button>
       </div>
     </div>
   </div>
