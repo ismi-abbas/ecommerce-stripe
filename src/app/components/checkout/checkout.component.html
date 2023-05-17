@@ -1,12 +1,10 @@
-<div
-  class="pt-4 px-4 md:px-8 pb-8 rounded-md mx-4 md:mx-auto md:min-w-full mt-4 shadow-md bg-white"
->
+<div class="bg-white p-2 m-2 shadow-sm">
   <div class="flex items-center justify-center py-4 mb-2">
     <h1 class="font-semibold text-2xl">Checkout</h1>
   </div>
 
-  <div class="max-w-screen-sm md:max-w-screen-2xl">
-    <nz-steps [nzCurrent]="current" class="flex items-center">
+  <div class="w-full p-2">
+    <nz-steps [nzCurrent]="current" [nzDirection]="nzDirection" nzSize="small">
       <nz-step nzTitle="Shipping Address"></nz-step>
       <nz-step nzTitle="Payment Details"></nz-step>
     </nz-steps>

@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable, from, tap } from 'rxjs';
 export class AuthService {
   public isLoginSubject$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
+
   userData: any;
   isLoggedIn: boolean = false;
   authState: any = null;
@@ -51,10 +52,10 @@ export class AuthService {
 
   logout(): Observable<any> {
     return from(this.fireauth.signOut()).pipe(
-      tap(() => {
+      tap((res) => {
         this.isLoggedIn = false;
         localStorage.removeItem('user');
-        this.router.navigate(['login']);
+        return res;
       })
     );
   }

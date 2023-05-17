@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
   templateUrl: './checkout.component.html',
 })
 export class CheckoutComponent {
+  isMobile: boolean = false;
+  nzDirection: 'horizontal' | 'vertical' = 'vertical';
+
   success = false;
   payment_details = true;
   shipping_details = false;

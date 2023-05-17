@@ -8,7 +8,7 @@
   </div>
 
   <div
-    class="grid md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:mx-4 mx-0"
+    class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 md:mx-4 mx-0"
     *ngIf="!isLoading"
   >
     <div *ngFor="let product of products">
@@ -17,12 +17,8 @@
         [nzLoading]="isLoading"
         class="w-[20rem] md:w-auto"
       >
-        <div class="h-[20rem] w-[20rem] flex items-center justify-center p-2">
-          <img
-            src="{{ product?.image.url }}"
-            alt=""
-            class="object-cover max-w-full max-h-full"
-          />
+        <div class="flex items-center justify-center p-2 min-h-[16rem]">
+          <img src="{{ product?.image.url }}" alt="" class="object-cover" />
         </div>
         <nz-divider></nz-divider>
         <div class="flex flex-col justify-between">

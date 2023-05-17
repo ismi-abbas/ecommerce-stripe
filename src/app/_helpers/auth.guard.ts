@@ -24,6 +24,10 @@ export class AuthGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.auth.isLoginSubject$.asObservable();
+    if (this.auth.isLoginSubject$.asObservable()) {
+      // this.router.navigate(['/dashboard']);
+      return true;
+    }
+    return false;
   }
 }
