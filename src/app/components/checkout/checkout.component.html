@@ -1,9 +1,9 @@
-<div class="bg-white p-2 m-2 shadow-sm rounded-md mt-4">
+<div class="bg-white p-2 shadow-sm rounded-md w-auto h-auto mx-auto">
   <div class="flex items-center justify-center py-4 mb-2">
     <h1 class="font-semibold text-2xl">Checkout</h1>
   </div>
 
-  <div class="w-full p-2">
+  <div class="w-full p-2 flex flex-col max-w-lg mx-auto">
     <nz-steps [nzCurrent]="current" [nzDirection]="nzDirection">
       <nz-step nzTitle="Shipping Address"></nz-step>
       <nz-step nzTitle="Payment Details"></nz-step>
