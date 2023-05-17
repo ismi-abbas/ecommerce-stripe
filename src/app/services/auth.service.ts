@@ -2,7 +2,11 @@ import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject, Observable, from, tap } from 'rxjs';
-import { GoogleAuthProvider } from '@angular/fire/auth';
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -89,17 +93,30 @@ export class AuthService {
     return from(this.fireauth.sendPasswordResetEmail(passwordResetEmail));
   }
 
-  googleLogin(): Observable<any> {
+  async googleLogin() {
     const provider = new GoogleAuthProvider();
-    return from(this.fireauth.signInWithPopup(provider)).pipe(
-      tap((result) => {
-        if (result.user) {
-          console.log('Google Login ===>', result);
-          this.setUserData(result.user);
-          this.router.navigate(['/dashboard']);
-        }
-        return result.user;
+    const auth = getAuth();
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential: any = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+
+        this.isLoginSubject$.next(!!user);
+
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('token', token);
+
+        this.router.navigate(['/dashboard']);
+
+        return result;
       })
-    );
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
   }
 }

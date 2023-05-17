@@ -1,3 +1,4 @@
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Component } from '@angular/core';
 import {
   UntypedFormBuilder,
@@ -29,7 +30,8 @@ export class LoginComponent {
   constructor(
     private formBuilder: UntypedFormBuilder,
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
@@ -69,10 +71,6 @@ export class LoginComponent {
   }
 
   loginWithGoogle() {
-    this.auth.googleLogin().pipe(
-      tap((data) => {
-        console.log('loginWithGoogle', data);
-      })
-    );
+    this.auth.googleLogin();
   }
 }
