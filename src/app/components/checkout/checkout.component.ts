@@ -26,21 +26,14 @@ export class CheckoutComponent {
   isCartLoading = false;
 
   constructor(public cartService: CartService, private router: Router) {
-    this.loadCartItems();
-  }
-
-  loadCartItems() {
-    this.loading = true;
-    this.cartService
-      .getCartItems()
-      .pipe(
-        map((cartItems) => {
-          this.checkout_cart = cartItems.line_items;
-          this.total_price = cartItems.subtotal.formatted_with_symbol;
-          this.loading = false;
-        })
-      )
-      .subscribe();
+    if (this.checkout_cart.length === 0) {
+      this.cartService.cartItemSubject$.subscribe((res) => {
+        if (res) {
+          this.checkout_cart = res.line_items;
+          this.total_price = res.subtotal.formatted_with_symbol;
+        }
+      });
+    }
   }
 
   ngOnInit(): void {}
@@ -51,8 +44,6 @@ export class CheckoutComponent {
       this.success = false;
     }, 2000);
   }
-
-  // NZ STEPS
 
   current = 0;
 

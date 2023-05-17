@@ -23,6 +23,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 import {
   AccountBookFill,
@@ -80,6 +81,7 @@ const icons: IconDefinition[] = [
     NzMessageModule,
     NzResultModule,
     NzDrawerModule,
+    NzSelectModule,
   ],
   exports: [
     NzLayoutModule,
@@ -103,6 +105,7 @@ const icons: IconDefinition[] = [
     NzMessageModule,
     NzResultModule,
     NzDrawerModule,
+    NzSelectModule,
   ],
 })
 export class AntDesignModule {}

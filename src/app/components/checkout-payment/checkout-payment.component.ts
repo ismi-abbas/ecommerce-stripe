@@ -17,21 +17,12 @@ export class CheckoutPayment {
   isLoading: boolean = false;
 
   constructor(public cartService: CartService) {
-    this.loadCartItems();
-  }
-
-  loadCartItems() {
-    this.isLoading = true;
-    this.cartService
-      .getCartItems()
-      .pipe(
-        map((cartItems) => {
-          this.checkout_cart = cartItems.line_items;
-          this.total_price = cartItems.subtotal.formatted_with_symbol;
-          this.isLoading = false;
-        })
-      )
-      .subscribe();
+    this.cartService.cartItemSubject$.subscribe((res) => {
+      if (res) {
+        this.checkout_cart = res.line_items;
+        this.total_price = res.subtotal.formatted_with_symbol;
+      }
+    });
   }
 
   ngOnInit(): void {}

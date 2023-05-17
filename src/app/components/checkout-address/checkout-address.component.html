@@ -10,99 +10,68 @@
       [formGroup]="validateForm"
       (ngSubmit)="submit()"
     >
-      <nz-form-item class="w-full">
-        <nz-form-control>
-          <div class="flex flex-col space-y-4">
-            <!-- Name -->
-            <div class="flex space-x-6">
-              <nz-input-group nzPrefixIcon="user">
-                <input
-                  type="text"
-                  nz-input
-                  formControlName="firsname"
-                  placeholder="First name"
-                />
-              </nz-input-group>
-              <nz-input-group nzPrefixIcon="user">
-                <input
-                  type="text"
-                  nz-input
-                  formControlName="lastname"
-                  placeholder="Last name"
-                />
-              </nz-input-group>
+      <nz-form-control>
+        <div class="flex flex-col space-y-4">
+          <!-- Name -->
+          <div class="flex space-x-6">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" nz-input placeholder="First name" />
+            </nz-input-group>
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" nz-input placeholder="Last name" />
+            </nz-input-group>
+          </div>
+          <!-- Address & email -->
+          <div class="flex space-x-6">
+            <nz-input-group nzPrefixIcon="home">
+              <input type="text" nz-input placeholder="Address line 1" />
+            </nz-input-group>
+            <nz-input-group nzPrefixIcon="mail">
+              <input type="email" nz-input placeholder="Email" />
+            </nz-input-group>
+          </div>
+          <!-- City and postcode -->
+          <div class="flex space-x-6">
+            <nz-input-group nzPrefixIcon="environment">
+              <input type="text" nz-input placeholder="City" />
+            </nz-input-group>
+            <nz-input-group nzPrefixIcon="home">
+              <input type="text" nz-input placeholder="Zip / Postal code" />
+            </nz-input-group>
+          </div>
+          <!-- Shipping country -->
+          <div class="flex space-x-6">
+            <div class="flex w-1/2">
+              <nz-select class="w-full" nzPlaceHolder="Malaysia">
+                <nz-option
+                  [nzLabel]="'Malaysia'"
+                  [nzValue]="'Malaysia'"
+                ></nz-option>
+                <nz-option
+                  [nzLabel]="'Singapore'"
+                  [nzValue]="'Singapore'"
+                ></nz-option>
+              </nz-select>
             </div>
-            <!-- Address & email -->
-            <div class="border flex space-x-6">
-              <nz-input-group nzPrefixIcon="address">
-                <input
-                  type="text"
-                  nz-input
-                  formControlName="address"
-                  placeholder="Address line 1"
-                />
-              </nz-input-group>
-              <nz-input-group nzPrefixIcon="mail">
+            <div class="flex w-1/2">
+              <nz-input-group nzPrefixIcon="mail" class="w-full">
                 <input
                   type="email"
                   nz-input
-                  formControlName="email"
-                  placeholder="Email"
-                />
-              </nz-input-group>
-            </div>
-            <!-- City and postcode -->
-            <div class="border flex space-x-6">
-              <nz-input-group nzPrefixIcon="mail">
-                <input
-                  type="text"
-                  nz-input
-                  formControlName="email"
-                  placeholder="Email"
-                />
-              </nz-input-group>
-              <nz-input-group nzPrefixIcon="mail">
-                <input
-                  type="email"
-                  nz-input
-                  formControlName="email"
-                  placeholder="Last name"
-                />
-              </nz-input-group>
-            </div>
-            <!-- Shipping country -->
-            <div class="border flex space-x-6">
-              <nz-input-group nzPrefixIcon="mail">
-                <input
-                  type="text"
-                  nz-input
-                  formControlName="shipping_country"
-                  placeholder="Shipping Country"
-                />
-              </nz-input-group>
-              <nz-input-group nzPrefixIcon="mail">
-                <input
-                  type="email"
-                  nz-input
-                  formControlName="shipping_subdivision"
                   placeholder="Shipping Subdivision"
                 />
               </nz-input-group>
             </div>
-            <!-- Shipping Options -->
-            <div class="border flex space-x-6">
-              <nz-input-group nzPrefixIcon="mail">
-                <input
-                  type="text"
-                  nz-input
-                  formControlName="shipping_country"
-                  placeholder="Shipping Country"
-                />
-              </nz-input-group>
-            </div>
           </div>
-        </nz-form-control>
-      </nz-form-item>
+
+          <!-- Shipping Options -->
+          <div class="flex-col flex space-x-6">
+            <nz-input-group>
+              <input type="text" nz-input />
+            </nz-input-group>
+          </div>
+        </div>
+      </nz-form-control>
     </form>
   </div>
 </div>
