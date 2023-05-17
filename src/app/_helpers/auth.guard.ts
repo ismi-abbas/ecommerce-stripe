@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -24,10 +24,16 @@ export class AuthGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.auth.isLoginSubject$.asObservable()) {
-      // this.router.navigate(['/dashboard']);
-      return true;
-    }
-    return false;
+    return this.auth.isLoginSubject$.pipe(
+      map((data) => {
+        console.log('AuthGuard', data);
+        if (data) {
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      })
+    );
   }
 }

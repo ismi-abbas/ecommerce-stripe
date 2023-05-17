@@ -1,7 +1,8 @@
-import { Injectable, NgZone, OnInit } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject, Observable, from, tap } from 'rxjs';
+import { GoogleAuthProvider } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -76,5 +77,29 @@ export class AuthService {
       .catch((error) => {
         window.alert(error.message);
       });
+  }
+
+  sendEmailVerification(): Observable<any> {
+    return from(
+      this.fireauth.currentUser.then((u) => u?.sendEmailVerification())
+    );
+  }
+
+  forgotPassword(passwordResetEmail: string): Observable<any> {
+    return from(this.fireauth.sendPasswordResetEmail(passwordResetEmail));
+  }
+
+  googleLogin(): Observable<any> {
+    const provider = new GoogleAuthProvider();
+    return from(this.fireauth.signInWithPopup(provider)).pipe(
+      tap((result) => {
+        if (result.user) {
+          console.log('Google Login ===>', result);
+          this.setUserData(result.user);
+          this.router.navigate(['/dashboard']);
+        }
+        return result.user;
+      })
+    );
   }
 }

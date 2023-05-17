@@ -28,22 +28,33 @@ export class LoginComponent {
 
   constructor(
     private formBuilder: UntypedFormBuilder,
-    private auth: AuthService,
+    public auth: AuthService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.validateForm = this.formBuilder.group({
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      remember: [false],
+    });
+  }
 
   async submitForm() {
     if (this.validateForm.valid) {
       this.auth
         .login(this.validateForm.value.email, this.validateForm.value.password)
         .subscribe({
-          next: () => {
+          next: (data) => {
+            if (!data.user.emailVerified) {
+              this.auth.sendEmailVerification();
+            }
+            console.log('loginSubmitForm', data);
             this.router.navigate(['/dashboard']);
           },
           error: (err) => {
             this.invalidLogin = true;
             this.invalidLoginMessage = err.message;
-            console.log('Firebase error', err.message);
             setTimeout(() => (this.invalidLogin = false), 5000);
           },
         });
@@ -57,11 +68,11 @@ export class LoginComponent {
     }
   }
 
-  ngOnInit(): void {
-    this.validateForm = this.formBuilder.group({
-      email: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [false],
-    });
+  loginWithGoogle() {
+    this.auth.googleLogin().pipe(
+      tap((data) => {
+        console.log('loginWithGoogle', data);
+      })
+    );
   }
 }
