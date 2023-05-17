@@ -1,4 +1,4 @@
-<div class="flex w-full flex-col pb-8">
+<div class="flex w-full flex-col h-auto">
   <div class="flex mx-auto flex-col mt-4 mb-4 text-center">
     <h1 class="text-3xl font-semibold">Store</h1>
   </div>
@@ -8,7 +8,7 @@
   </div>
 
   <div
-    class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 md:mx-4 mx-0"
+    class="grid md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-2 md:mx-4 mx-0"
     *ngIf="!isLoading"
   >
     <div *ngFor="let product of products">

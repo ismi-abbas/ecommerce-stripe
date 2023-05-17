@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class CheckoutComponent {
   isMobile: boolean = false;
-  nzDirection: 'horizontal' | 'vertical' = 'vertical';
+  nzDirection: 'horizontal' | 'vertical' = 'horizontal';
 
   success = false;
   payment_details = true;
