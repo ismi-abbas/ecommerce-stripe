@@ -26,6 +26,7 @@
     "@stripe/stripe-js": "1.52.1",
     "firebase": "9.21.0",
     "ng-zorro-antd": "15.1.0",
+    "ngx-stripe": "^16.0.0",
     "rxjs": "~7.8.0",
     "stripe-angular": "^1.9.3",
     "tslib": "^2.3.0",

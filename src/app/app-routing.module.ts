@@ -8,6 +8,7 @@ import { CheckoutPayment } from './components/checkout-payment/checkout-payment.
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
+import { StripePaymentComponent } from './components/stripe-payment/stripe-payment.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,14 @@ const routes: Routes = [
   {
     path: 'payment-success',
     component: PaymentSuccessComponent,
+  },
+  {
+    path: 'stripe-payment',
+    component: StripePaymentComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
   },
 ];
 
