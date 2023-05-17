@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.isLoginSubject$.subscribe((data) => {
-      console.log('isLoggedInSubject ==>', data);
       this.isLoggedIn = data;
     });
 
@@ -36,6 +35,10 @@ export class AppComponent implements OnInit {
 
     this.cartService.cartCountSubject$.subscribe((data) => {
       this.cartItemsCount = data;
+    });
+
+    this.cartService.getCartItems().subscribe((data) => {
+      this.cartService.cartItemSubject$.next(data);
     });
   }
 

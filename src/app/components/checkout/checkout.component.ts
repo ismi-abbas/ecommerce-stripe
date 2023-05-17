@@ -37,7 +37,6 @@ export class CheckoutComponent {
         map((cartItems) => {
           this.checkout_cart = cartItems.line_items;
           this.total_price = cartItems.subtotal.formatted_with_symbol;
-          console.log('checkout_cart', cartItems);
           this.loading = false;
         })
       )

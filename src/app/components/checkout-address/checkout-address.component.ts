@@ -10,7 +10,5 @@ export class CheckoutAddress {
 
   constructor() {}
 
-  submit() {
-    console.log('submit');
-  }
+  submit() {}
 }

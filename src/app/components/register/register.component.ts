@@ -16,7 +16,6 @@ export class RegisterComponent {
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -42,7 +41,6 @@ export class RegisterComponent {
   }
 
   register() {
-    console.log('register', this.validateForm.value);
     this.authService
       .register(this.validateForm.value.email, this.validateForm.value.password)
       .then((res) => {})

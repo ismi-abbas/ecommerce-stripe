@@ -46,9 +46,7 @@ export class AuthService {
     );
   }
 
-  setUserData(user: any) {
-    console.log('SetUserData', user);
-  }
+  setUserData(user: any) {}
 
   get loggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user') || 'null');
@@ -69,7 +67,6 @@ export class AuthService {
     return this.fireauth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log('Register ===>', result);
         this.setUserData(result.user);
         this.fireauth.authState.subscribe((user) => {
           if (user) {

@@ -13,6 +13,7 @@ export class DashboardComponent {
   isLoading: boolean = true;
   products: any[] = [];
   isAdded: boolean = false;
+  cartItems: any = '';
 
   constructor(
     private commercejs: CommercejsService,
@@ -21,14 +22,20 @@ export class DashboardComponent {
     private message: NzMessageService
   ) {
     this.getProducts();
+    this.cartService.cartItemSubject$.subscribe((res) => {
+      if (res) {
+        this.cartItems = res;
+      }
+    });
   }
 
   ngOnInit() {}
 
   addToCart(productId: string): void {
     this.cartService.addToCart(productId).subscribe((res) => {
+      this.message.success('Added to cart');
       this.cartService.cartCountSubject$.next(res.total_items);
-      this.message.success('Product added to cart');
+      this.cartService.cartItemSubject$.next(res);
     });
     this.isAdded = true;
   }
@@ -36,14 +43,8 @@ export class DashboardComponent {
   getProducts() {
     this.isLoading = true;
     this.commercejs.getProducts().subscribe((products) => {
-      console.log('products from observable', products);
       this.isLoading = false;
       this.products = products;
     });
-  }
-
-  sendData(data: any) {
-    console.log('Data send ===>', data.value);
-    this.cartService.sendNotiData(data.value);
   }
 }

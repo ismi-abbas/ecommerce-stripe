@@ -9,22 +9,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CartService {
-  private cartSubject$: BehaviorSubject<number> = new BehaviorSubject<number>(
-    0
-  );
-  public carts$: Observable<number> = this.cartSubject$.asObservable();
-
-  public notificationSubject$: BehaviorSubject<string> =
-    new BehaviorSubject<string>('Something in here');
-
   public cartItemSubject$: BehaviorSubject<any> = new BehaviorSubject<any>(
     null
   );
 
   public cartCountSubject$: BehaviorSubject<number> =
     new BehaviorSubject<number>(0);
-
-  public cartCount$: Observable<number> = this.cartCountSubject$.asObservable();
 
   carts: number = 0;
 
@@ -89,12 +79,9 @@ export class CartService {
 
   getCartItems(): Observable<Cart> {
     return from(this.commerce.getCommerce().cart.retrieve()).pipe(
-      map((res: Cart) => res)
+      map((res: Cart) => {
+        return res;
+      })
     );
-  }
-
-  sendNotiData(data: string) {
-    this.notificationSubject$.next(data);
-    console.log('data received ===>', data);
   }
 }

@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
   templateUrl: './shopping-cart.component.html',
 })
 export class ShoppingCartComponent {
-  divsArray: any[] = Array.from({ length: 8 }, (_, i) => i);
   cart_list: any[] = [];
   cart_items: any;
   total_cost: string = '';
@@ -22,15 +21,22 @@ export class ShoppingCartComponent {
     private router: Router,
     private message: NzMessageService
   ) {
-    this.getCartItems();
     this.getCartId();
+    this.isLoading = true;
+    this.cartService.cartItemSubject$.subscribe((res) => {
+      if (res) {
+        this.cart_items = res;
+        this.cart_list = res.line_items;
+        this.total_cost = res.subtotal?.formatted_with_symbol;
+        this.isLoading = false;
+      }
+    });
   }
 
   ngOnInit(): void {}
 
   async getCartId() {
     let id = this.cartService.getCartId();
-    console.log('getCartId', id);
     return id;
   }
 
@@ -40,14 +46,12 @@ export class ShoppingCartComponent {
 
   addToCart(productId: string): void {
     this.cartService.addToCart(productId).subscribe((cart) => {
-      console.log('addToCart', cart);
       this.cart_items = cart;
     });
   }
 
   updateCart(productId: string, quantity: number): void {
     this.cartService.updateCart(productId, quantity).subscribe((cart) => {
-      console.log('updateCart', cart);
       this.cart_items = cart;
       this.cart_list = cart.line_items;
     });
@@ -63,16 +67,6 @@ export class ShoppingCartComponent {
       this.cartService.cartCountSubject$.next(0);
       this.cartService.cartItemSubject$.next([]);
       this.message.success('Cart emptied');
-    });
-  }
-
-  getCartItems() {
-    this.isLoading = true;
-    this.cartService.getCartItems().subscribe((cart_item) => {
-      this.cart_list = cart_item.line_items;
-      this.isLoading = false;
-      console.log('getCartItems', cart_item);
-      this.cart_items = cart_item;
     });
   }
 }

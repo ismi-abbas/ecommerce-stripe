@@ -20,27 +20,22 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'checkout',
     component: CheckoutComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'checkout-address',
     component: CheckoutPayment,
-    canActivate: [AuthGuard],
   },
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'payment-success',
     component: PaymentSuccessComponent,
-    canActivate: [AuthGuard],
   },
 ];
 

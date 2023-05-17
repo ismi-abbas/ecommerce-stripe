@@ -51,7 +51,6 @@ export class LoginComponent {
             if (!data.user.emailVerified) {
               this.auth.sendEmailVerification();
             }
-            console.log('loginSubmitForm', data);
             this.router.navigate(['/dashboard']);
           },
           error: (err) => {
