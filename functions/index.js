@@ -17,19 +17,7 @@ const PORT = process.env.PORT || 5174;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 app.post("/v2/checkout", async (req, res, next) => {
-  console.log(JSON.stringify(req.body));
-  let line_items = req.body.items.map((item) => ({
-    price_data: {
-      currency: "myr",
-      product_data: {
-        name: item.name,
-        images: [item.product],
-      },
-      unit_amount: item.price * 100,
-    },
-    quantity: item.quantity,
-  }));
-  console.log("line_items", line_items);
+  console.log("items", JSON.stringify(req.body.items));
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],

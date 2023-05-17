@@ -55,13 +55,14 @@ export class CheckoutPayment {
   }
 
   async handleCheckout(items: any[]) {
+    console.log(items);
     let data: any = [];
     items.map((item) => {
       data.push({
         name: item.name,
         price: item.price.raw,
         quantity: item.quantity,
-        product: item.image.url,
+        product: 'raw',
       });
     });
 
@@ -70,7 +71,7 @@ export class CheckoutPayment {
     try {
       this.stripe.createStripeCheckoutSession(data).subscribe((res: any) => {
         console.log(res);
-        this.redirectToStripeCheckout(res.sessionId);
+        this.redirectToStripeCheckout(res.id);
       });
     } catch (error) {
       console.error(error);

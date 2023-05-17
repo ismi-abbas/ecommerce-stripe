@@ -16,22 +16,25 @@ export class StripeService {
   functionsUrls: string = environment.functionsUrls;
   constructor(private http: HttpClient, private router: Router) {}
 
-  createStripeCheckoutSession(items: any[]): any {
-    console.log('createStripeCheckoutSession', items);
+  createStripeCheckoutSession(data: any[]): any {
+    console.log('createStripeCheckoutSession', data);
     return from(
       this.http
-        .post(`${this.functionsUrls}/v2/checkout`, {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-          }),
-          body: {
-            items: items,
+        .post(
+          `${this.functionsUrls}/v2/checkout`,
+          {
+            items: data,
           },
-        })
+          {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+            }),
+          }
+        )
         .pipe(
           map((res: any) => {
             console.log(res);
-            return res.session_id;
+            return res;
           })
         )
     );
