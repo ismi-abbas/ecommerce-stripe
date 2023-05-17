@@ -1,79 +1,88 @@
-<div class="shadow-md p-8 flex flex-col rounded-xl w-[22rem] bg-white">
-  <h1 class="text-2xl text-center font-semibold">{{ title }}</h1>
-
-  <form
-    class="flex flex-col items-center justify-center w-full mt-4"
-    nz-form
-    [formGroup]="validateForm"
-    (ngSubmit)="submitForm()"
+<section class="bg-gray-100">
+  <div
+    class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 bg-white"
   >
-    <nz-form-item class="w-full">
-      <nz-form-control [nzErrorTip]="errorMessage.email[0].message">
-        <nz-input-group nzPrefixIcon="user">
-          <input
-            type="text"
-            nz-input
-            formControlName="email"
-            placeholder="Email"
-          />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item class="w-full">
-      <nz-form-control [nzErrorTip]="errorMessage.password[0].message">
-        <nz-input-group nzPrefixIcon="lock">
-          <input
-            type="password"
-            nz-input
-            formControlName="password"
-            placeholder="Password"
-            autocomplete="on"
-          />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-    <div class="m-2 flex items-center gap-4 justify-between w-full">
-      <div class="items-start flex">
-        <label nz-checkbox formControlName="remember">
-          <span class="flex items-center h-5">Remember me</span>
-        </label>
+    <div
+      class="w-full bg-white rounded-lg md:mt-0 sm:max-w-md xl:p-0 shadow-md p-4"
+    >
+      <h1 class="text-2xl text-center font-semibold">{{ title }}</h1>
+      <div class="p-2 md:p-8">
+        <form
+          class="mt-4 space-y-4"
+          nz-form
+          [formGroup]="validateForm"
+          (ngSubmit)="submitForm()"
+        >
+          <nz-form-item class="w-full">
+            <nz-form-control [nzErrorTip]="errorMessage.email[0].message">
+              <nz-input-group nzPrefixIcon="user">
+                <input
+                  type="text"
+                  nz-input
+                  formControlName="email"
+                  placeholder="Email"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="w-full">
+            <nz-form-control [nzErrorTip]="errorMessage.password[0].message">
+              <nz-input-group nzPrefixIcon="lock">
+                <input
+                  type="password"
+                  nz-input
+                  formControlName="password"
+                  placeholder="Password"
+                  autocomplete="on"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <div class="m-2 flex items-center gap-4 justify-between">
+            <div class="items-start flex">
+              <label nz-checkbox formControlName="remember">
+                <span class="flex items-center h-5">Remember me</span>
+              </label>
+            </div>
+
+            <a>Forgot password</a>
+          </div>
+
+          <div class="flex flex-col w-full">
+            <button nz-button [nzType]="'primary'" (click)="submitForm()">
+              Log in
+            </button>
+            <div>
+              <span>Or </span>
+              <a routerLink="/register">register now!</a>
+            </div>
+          </div>
+        </form>
+
+        <div class="flex flex-row mt-2 gap-2 justify-start">
+          <i
+            nz-icon
+            nzType="google"
+            (click)="loginWithGoogle()"
+            class="hover:bg-blue-400 rounded-lg hover:shadow-sm px-2 cursor-pointer hover:text-white text-lg"
+          ></i>
+          <i
+            nz-icon
+            nzType="facebook"
+            (click)="loginWithGoogle()"
+            class="hover:bg-blue-400 hover:shadow-sm rounded-lg px-2 cursor-pointer hover:text-white text-lg"
+          ></i>
+          <i
+            nz-icon
+            nzType="twitter"
+            (click)="loginWithGoogle()"
+            class="hover:bg-blue-400 rounded-lg hover:shadow-sm px-2 cursor-pointer hover:text-white text-lg"
+          ></i>
+        </div>
       </div>
-
-      <a>Forgot password</a>
     </div>
-
-    <div class="flex flex-col w-full">
-      <button nz-button [nzType]="'primary'" (click)="submitForm()">
-        Log in
-      </button>
-      <div>
-        <span>Or </span>
-        <a routerLink="/register">register now!</a>
-      </div>
-    </div>
-  </form>
-
-  <div class="flex flex-row mt-2 gap-2 justify-start">
-    <i
-      nz-icon
-      nzType="google"
-      (click)="loginWithGoogle()"
-      class="hover:bg-blue-400 rounded-lg hover:shadow-sm px-2 cursor-pointer hover:text-white text-lg"
-    ></i>
-    <i
-      nz-icon
-      nzType="facebook"
-      (click)="loginWithGoogle()"
-      class="hover:bg-blue-400 hover:shadow-sm rounded-lg px-2 cursor-pointer hover:text-white text-lg"
-    ></i>
-    <i
-      nz-icon
-      nzType="twitter"
-      (click)="loginWithGoogle()"
-      class="hover:bg-blue-400 rounded-lg hover:shadow-sm px-2 cursor-pointer hover:text-white text-lg"
-    ></i>
   </div>
-</div>
+</section>
 
 <nz-alert
   class="fixed bottom-10 items-center transform -translate-x-1/2 w-2/4 transition-all duration-500 ease-in-out"
