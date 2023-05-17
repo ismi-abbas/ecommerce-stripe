@@ -1,15 +1,12 @@
 export const environment = {
   firebase: {
-    projectId: 'commerce-js-angular',
-    appId: '1:112811719077:web:818ca4ee108abec44e104c',
-    databaseURL:
-      'https://commerce-js-angular-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'commerce-js-angular.appspot.com',
-    locationId: 'asia-southeast1',
-    apiKey: 'AIzaSyBaQlySLE4_n2D7Ol5OwyOQbphJawjNKUA',
-    authDomain: 'commerce-js-angular.firebaseapp.com',
-    messagingSenderId: '112811719077',
-    measurementId: 'G-1DT7MRPB0M',
+    apiKey: 'AIzaSyCHD3_iG033S9NSY8cEd6Y9J9Hr-19bloY',
+    authDomain: 'stripe-ecommerce-4996e.firebaseapp.com',
+    projectId: 'stripe-ecommerce-4996e',
+    storageBucket: 'stripe-ecommerce-4996e.appspot.com',
+    messagingSenderId: '567903362301',
+    appId: '1:567903362301:web:26ed1eed7182aa78c7f294',
+    measurementId: 'G-MBMPG3EHFP',
   },
   commercejs: {
     publicKey: 'pk_test_5205211b62123c906a2f3a977cf959dfee9fa9be52213',
@@ -28,5 +25,6 @@ export const environment = {
     secret:
       'sk_test_51N4FypHwrIsuNEdoBPqr6y138ggxS5uv3JBTmOuWErLCXFrb7wkty0ApTu5e2RIenGRjKLUw9mT9BKHGijfynMnz00iHNx9P3e',
   },
+  functionsUrls: 'http://localhost:5174',
   production: false,
 };

@@ -1,48 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+
+interface checkoutSessionResponse {
+  sessionId: string;
+}
 
 declare const Stripe: any;
 @Injectable({
   providedIn: 'root',
 })
 export class StripeService {
-  private stripeUrl = 'https://api.stripe.com/v1';
-  private token = '';
+  functionsUrls: string = environment.functionsUrls;
+  constructor(private http: HttpClient, private router: Router) {}
 
-  constructor(private http: HttpClient) {}
-
-  requestMemberShip(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
-    return this.http.post(`${this.stripeUrl}/checkout/sessions`, {
-      headers,
-      success_url: 'https://example.com/success',
-      line_items: [{ price: 'price_H5ggYwtDq4fbrJ', quantity: 2 }],
-      mode: 'payment',
-    });
-  }
-
-  getPrice(price: number): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
-    return this.http.post(`${this.stripeUrl}/prices`, {
-      headers,
-      body: {
-        unit_amount: price,
-        currency: 'myr',
-      },
-    });
-  }
-
-  redirectToStripeCheckout(): void {
-    const stripe = Stripe(this.token);
-    stripe.redirectToCheckout({
-      items: [{ sku: 'sku_GBJ2kZ0QjXjJZI', quantity: 1 }],
-      successUrl: 'http://localhost:4200/success',
-      cancelUrl: 'http://localhost:4200/cancel',
-    });
+  createStripeCheckoutSession(items: any[]): any {
+    console.log('createStripeCheckoutSession', items);
+    return from(
+      this.http
+        .post(`${this.functionsUrls}/v2/checkout`, {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+          }),
+          body: {
+            items: items,
+          },
+        })
+        .pipe(
+          map((res: any) => {
+            console.log(res);
+            return res.session_id;
+          })
+        )
+    );
   }
 }
