@@ -24,6 +24,7 @@ export class AuthGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return false;
+    if (!this.auth.loggedIn) this.router.navigate(['login']);
+    return this.auth.loggedIn;
   }
 }
