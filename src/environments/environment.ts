@@ -13,8 +13,8 @@ export const environment = {
     secret: 'sk_test_5205237ebe467ef89d79e09667b23111e7558b99efc3c',
   },
   twitter: {
-    apiKey: 'nVCPsDp4SgGVQZkB6LMvOzcOb',
-    apiKeySecret: 'cbYBB2k5JWrjq5tAkFS9bCCLTYoZdSgTKNyJVNeLcZmv8ABJIS',
+    apiKey: 'nvHy1M3x09vVzEDB9l8Jj90Rr',
+    apiKeySecret: '7thStHsyriUfRu6YK8FmYBRopu40ZyebXJBasHdB95ufWfYy5b',
     authenticationToken:
       'AAAAAAAAAAAAAAAAAAAAAFIdngEAAAAA6D5Kzbsgto4oB4Lke7fKqpFYhqw%3DBHQucqzl7bV28qGBL5imB6MbxkOj1N0UQtmlmkKuQk5tRksMcG',
     accessToken: '1250308041859190785-jJJWf2cIV6lknCDBSDOa2ZRZvTDZ3w',

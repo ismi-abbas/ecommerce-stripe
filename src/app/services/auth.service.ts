@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject, Observable, from, tap } from 'rxjs';
 import {
   GoogleAuthProvider,
+  FacebookAuthProvider,
+  TwitterAuthProvider,
   getAuth,
   signInWithPopup,
 } from '@angular/fire/auth';
@@ -90,13 +92,21 @@ export class AuthService {
     return from(this.fireauth.sendPasswordResetEmail(passwordResetEmail));
   }
 
-  async googleLogin() {
-    const provider = new GoogleAuthProvider();
+  async socialLogin(social: 'google' | 'facebook' | 'twitter') {
     const auth = getAuth();
+    let provider: any;
+
+    if (social === 'google') {
+      provider = new GoogleAuthProvider();
+    } else if (social === 'facebook') {
+      provider = new FacebookAuthProvider();
+    } else if (social === 'twitter') {
+      provider = new TwitterAuthProvider();
+    }
 
     signInWithPopup(auth, provider)
       .then((result) => {
-        const credential: any = GoogleAuthProvider.credentialFromResult(result);
+        const credential = provider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
 
@@ -110,10 +120,7 @@ export class AuthService {
         return result;
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(error);
       });
   }
 }

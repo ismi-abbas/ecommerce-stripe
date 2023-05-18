@@ -58,6 +58,8 @@ export class CartService {
   emptyCart(): Observable<Cart> {
     return from(this.commerce.getCommerce().cart.empty()).pipe(
       map((res: any) => {
+        this.cartItemSubject$.next(res);
+        this.cartCountSubject$.next(res.total_items);
         this.carts = res.total_items;
         return res;
       })

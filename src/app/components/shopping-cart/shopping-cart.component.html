@@ -8,7 +8,10 @@
       <nz-spin nzSimple nzSize="large"></nz-spin>
     </div>
 
-    <div *ngIf="!isLoading && cart_list.length === 0" class="text-center my-4">
+    <div
+      *ngIf="!isLoading && (cart_list.length === 0 || cart_list === null)"
+      class="text-center my-4"
+    >
       <nz-result nzStatus="info" nzTitle="No items in cart">
         <div nz-result-extra>
           <button nz-button nzType="primary" routerLink="/dashboard">

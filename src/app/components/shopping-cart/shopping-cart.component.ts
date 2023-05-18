@@ -26,7 +26,8 @@ export class ShoppingCartComponent {
     this.cartService.cartItemSubject$.subscribe((res) => {
       if (res) {
         this.cart_items = res;
-        this.cart_list = res.line_items;
+        console.log('cartItemSubject | shopping cart', res);
+        this.cart_list = res.line_items ? res.line_items : [];
         this.total_cost = res.subtotal?.formatted_with_symbol;
         this.isLoading = false;
       }
@@ -58,16 +59,13 @@ export class ShoppingCartComponent {
   }
 
   removeFromCart(productId: string): void {
-    this.cartService.removeFromCart(productId).subscribe((cart) => {
+    this.cartService.removeFromCart(productId).subscribe(() => {
       this.message.success('Removed from cart');
     });
   }
 
   emptyCart(): void {
-    this.cartService.emptyCart().subscribe((cart) => {
-      this.cart_items = cart;
-      this.cartService.cartCountSubject$.next(0);
-      this.cartService.cartItemSubject$.next([]);
+    this.cartService.emptyCart().subscribe(() => {
       this.message.success('Cart emptied');
     });
   }

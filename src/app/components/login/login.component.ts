@@ -70,6 +70,14 @@ export class LoginComponent {
   }
 
   loginWithGoogle() {
-    this.auth.googleLogin();
+    this.auth.socialLogin('google');
+  }
+
+  loginWithFacebook() {
+    this.auth.socialLogin('facebook');
+  }
+
+  loginWithTwitter() {
+    this.auth.socialLogin('twitter');
   }
 }
