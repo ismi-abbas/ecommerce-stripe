@@ -16,14 +16,28 @@ export class StripeService {
   functionsUrls: string = environment.functionsUrls;
   constructor(private http: HttpClient, private router: Router) {}
 
-  createStripeCheckoutSession(data: any[]): any {
-    console.log('createStripeCheckoutSession', data);
+  createStripeCheckoutSession({
+    items,
+    success_url,
+    cancel_url,
+  }: {
+    items: any;
+    success_url: string;
+    cancel_url: string;
+  }): any {
+    console.log('createStripeCheckoutSession', {
+      items,
+      success_url,
+      cancel_url,
+    });
     return from(
       this.http
         .post(
           `${this.functionsUrls}/v2/checkout`,
           {
-            items: data,
+            items,
+            success_url,
+            cancel_url,
           },
           {
             headers: new HttpHeaders({

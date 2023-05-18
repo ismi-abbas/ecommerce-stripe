@@ -37,6 +37,7 @@ import { PaymentSuccessComponent } from './components/payment-success/payment-su
 // Stripe
 import { StripeModule } from 'stripe-angular';
 import { StripeCheckoutComponent } from './components/stripe-checkout/stripe-checkout.component';
+import { PaymentFailedComponent } from './components/payment-failed/payment-failed.component';
 
 registerLocaleData(en);
 
@@ -53,6 +54,7 @@ registerLocaleData(en);
     CheckoutAddress,
     PaymentSuccessComponent,
     StripeCheckoutComponent,
+    PaymentFailedComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,10 +18,12 @@ app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
 app.post("/v2/checkout", async (req, res, next) => {
   console.log("items", JSON.stringify(req.body.items));
+  const { items, success_url, cancel_url } = req.body;
+
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: req.body.items.map((item) => ({
+      line_items: items.map((item) => ({
         price_data: {
           currency: "myr",
           product_data: {
@@ -33,11 +35,9 @@ app.post("/v2/checkout", async (req, res, next) => {
         quantity: item.quantity,
       })),
       mode: "payment",
-      success_url: "http://localhost:5173/paymment-success",
-      cancel_url: "http://localhost:5173/paymment-cancel",
+      success_url: success_url,
+      cancel_url: cancel_url,
     });
-
-    console.log("stripeSession", session);
 
     res.status(200).json(session);
   } catch (error) {

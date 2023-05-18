@@ -9,8 +9,8 @@ export class PaymentSuccessComponent {
   title = 'Successfully purchased!';
 
   constructor(private router: Router) {
-    setTimeout(() => {
-      this.router.navigate(['/dashboard']);
-    }, 3000);
+    // setTimeout(() => {
+    //   this.router.navigate(['/dashboard']);
+    // }, 3000);
   }
 }

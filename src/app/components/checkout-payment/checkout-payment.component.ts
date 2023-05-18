@@ -69,10 +69,16 @@ export class CheckoutPayment {
     await console.log('checkoutItems', data);
 
     try {
-      this.stripe.createStripeCheckoutSession(data).subscribe((res: any) => {
-        console.log(res);
-        this.redirectToStripeCheckout(res.id);
-      });
+      this.stripe
+        .createStripeCheckoutSession({
+          items: data,
+          success_url: 'http://localhost:5173/payment-success',
+          cancel_url: 'http://localhost:5173/payment-cancel',
+        })
+        .subscribe((res: any) => {
+          console.log(res);
+          this.redirectToStripeCheckout(res.id);
+        });
     } catch (error) {
       console.error(error);
     }
