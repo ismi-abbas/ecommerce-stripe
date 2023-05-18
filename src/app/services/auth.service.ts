@@ -9,6 +9,7 @@ import {
   getAuth,
   signInWithPopup,
 } from '@angular/fire/auth';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,8 @@ export class AuthService {
   constructor(
     private fireauth: AngularFireAuth,
     private router: Router,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    private message: NzMessageService
   ) {
     this.authState = this.fireauth.authState.subscribe((user) => {
       if (user) {
@@ -106,20 +108,33 @@ export class AuthService {
 
     signInWithPopup(auth, provider)
       .then((result) => {
-        const credential = provider.credentialFromResult(result);
-        const token = credential.accessToken;
+        let credential: any;
+
+        if (social === 'google') {
+          credential = GoogleAuthProvider.credentialFromResult(result);
+        } else if (social === 'facebook') {
+          credential = FacebookAuthProvider.credentialFromResult(result);
+        } else if (social === 'twitter') {
+          credential = TwitterAuthProvider.credentialFromResult(result);
+        }
+
+        const token = credential?.accessToken;
         const user = result.user;
 
         this.isLoginSubject$.next(!!user);
 
         localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', token!);
 
         this.router.navigate(['/dashboard']);
 
         return result;
       })
       .catch((error) => {
+        this.message.error(error.message, {
+          nzDuration: 5000,
+          nzAnimate: true,
+        });
         console.log(error);
       });
   }

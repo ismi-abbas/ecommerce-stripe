@@ -43,7 +43,7 @@ export class CheckoutPayment {
     }, 2000);
   }
 
-  async payWithStripe(items: any[]) {
+  public async payWithStripe(items: any[]) {
     console.log(items);
     let data: any = [];
     items.map((item) => {
@@ -74,7 +74,7 @@ export class CheckoutPayment {
     }
   }
 
-  redirectToStripeCheckout(sessionId: string) {
+  public redirectToStripeCheckout(sessionId: string) {
     const stripe = Stripe(environment.stripe.key); // Replace with your Stripe publishable key
 
     stripe

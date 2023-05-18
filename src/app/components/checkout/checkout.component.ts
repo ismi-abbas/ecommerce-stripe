@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { CheckoutPayment } from '../checkout-payment/checkout-payment.component';
+import { StripeService } from 'src/app/services/stripe.service';
 
 @Component({
   selector: 'app-checkout',
@@ -25,7 +27,11 @@ export class CheckoutComponent {
   isPaymentFailed = false;
   isCartLoading = false;
 
-  constructor(public cartService: CartService, private router: Router) {
+  constructor(
+    public cartService: CartService,
+    private router: Router,
+    private stripeService: StripeService
+  ) {
     if (this.checkout_cart.length === 0) {
       this.cartService.cartItemSubject$.subscribe((res) => {
         if (res) {
@@ -39,10 +45,13 @@ export class CheckoutComponent {
   ngOnInit(): void {}
 
   pay() {
-    this.success = true;
-    setTimeout(() => {
-      this.success = false;
-    }, 2000);
+    const checkoutPayment = new CheckoutPayment(
+      this.cartService,
+      this.stripeService,
+      this.router
+    );
+
+    checkoutPayment.payWithStripe(this.checkout_cart);
   }
 
   current = 0;
