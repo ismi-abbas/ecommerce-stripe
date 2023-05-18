@@ -43,18 +43,7 @@ export class CheckoutPayment {
     }, 2000);
   }
 
-  payWithStripe() {
-    this.loading = true;
-    this.stripe
-      .createStripeCheckoutSession(this.checkout_cart)
-      .subscribe((res: any) => {
-        console.log(res);
-        this.loading = false;
-        this.checkoutUrl = res.sessionId;
-      });
-  }
-
-  async handleCheckout(items: any[]) {
+  async payWithStripe(items: any[]) {
     console.log(items);
     let data: any = [];
     items.map((item) => {
@@ -67,6 +56,7 @@ export class CheckoutPayment {
     });
 
     await console.log('checkoutItems', data);
+    this.stripe.paymentInfo.next(items);
 
     try {
       this.stripe

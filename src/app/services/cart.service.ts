@@ -67,7 +67,8 @@ export class CartService {
   deleteCart(): Observable<any> {
     return from(this.commerce.getCommerce().cart.delete()).pipe(
       map((res: DeleteResponse) => {
-        this.carts = 0;
+        this.cartCountSubject$.next(0);
+        this.cartItemSubject$.next(null);
         return res;
       })
     );

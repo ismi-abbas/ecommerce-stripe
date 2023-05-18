@@ -39,9 +39,8 @@
       <button nz-button nzType="primary">
         <a [href]="checkoutUrl" target="_blank">Pay With Chec</a>
       </button>
-      <button nz-button (click)="payWithStripe()">Pay With Stripe</button>
-      <button nz-button (click)="handleCheckout(checkout_cart)">
-        Handle Checkout
+      <button nz-button (click)="payWithStripe(checkout_cart)">
+        Pay With Stripe
       </button>
     </div>
   </section>

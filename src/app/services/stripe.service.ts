@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, from, map } from 'rxjs';
+import { BehaviorSubject, Observable, from, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,16 @@ declare const Stripe: any;
   providedIn: 'root',
 })
 export class StripeService {
+  public isPaymentPending: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+
+  public isPaymentSuccess: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+
+  public paymentInfo: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
   functionsUrls: string = environment.functionsUrls;
+
   constructor(private http: HttpClient, private router: Router) {}
 
   createStripeCheckoutSession({
@@ -47,7 +56,7 @@ export class StripeService {
         )
         .pipe(
           map((res: any) => {
-            console.log(res);
+            this.isPaymentPending.next(true);
             return res;
           })
         )

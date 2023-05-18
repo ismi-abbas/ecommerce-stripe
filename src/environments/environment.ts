@@ -19,6 +19,7 @@ export const environment = {
       'AAAAAAAAAAAAAAAAAAAAAFIdngEAAAAA6D5Kzbsgto4oB4Lke7fKqpFYhqw%3DBHQucqzl7bV28qGBL5imB6MbxkOj1N0UQtmlmkKuQk5tRksMcG',
     accessToken: '1250308041859190785-jJJWf2cIV6lknCDBSDOa2ZRZvTDZ3w',
     accessTokenSecret: 'KhgdYflOIMHsNQR7knjq9B954evaEfeyQP4z79dqJ4aWB',
+    authSecret: '7VoTQNvl8HGMTh9MtpdTSG446O-WoWrk6vSLpt0Vx9sjbMCWm7',
   },
   stripe: {
     key: 'pk_test_51N4FypHwrIsuNEdo8fc2cu0vlijrmlxl2FV7Puj9Wv7hHznkMHgUuEhjgqgJRjpIWe1GeU9Oe3flQUMVMZ3jfJt600gvIuk0i8',

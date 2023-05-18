@@ -44,16 +44,16 @@ const routes: Routes = [
     component: StripePaymentComponent,
   },
   {
-    path: '**',
-    redirectTo: 'login',
-  },
-  {
     path: 'payment-success',
     component: PaymentSuccessComponent,
   },
   {
     path: 'payment-failed',
     component: PaymentFailedComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
   },
 ];
 
